@@ -1,134 +1,67 @@
+body{
+  display: grid;
+  grid-template-rows: 60px 1fr 60px ;
+}
+
 .navbar {
   margin: 0 5vw;
 }
 
 .navbar-collapse{
   justify-content: flex-end !important;
-  color: #0B9EBF !important;
+  color: #113A8C !important;
 }
   
 .navbar-brand{
   font-weight: bold;
-  color: #0B9EBF !important;
+  color: #113A8C !important;
 }
 
 .navbar-brand:focus, .navbar-brand:hover{
-  color: #0B9EBF !important;
+  color: #113A8C !important;
 }
 
 .navbar-expand-lg .navbar-nav .nav-link {
-  color: #0B9EBF !important;
+  color: #113A8C !important;
 }
 
 .navbar-nav .nav-link.active, .navbar-nav .show>.nav-link{
-  color: #0B9EBF !important;
+  color: #113A8C !important;
   font-weight: bold;
 }
 
- .navbar-inverse{
-     background-color: #0D2241;
-     height: 100px;
-
-    }
-
-
-.galery {
-  margin:auto;
-  background-color:#4E931C;
-  height: 600px;
+.main-home{
+  display: grid !important;
+  grid-template-columns: 500px 500px !important; 
+  justify-content: space-around !important;
+  margin: auto !important;
+  width: 100%;
 }
 
-.galery2 {
-margin:auto;
-  background-color:#f4f4f4;
-  padding-left:200px;
-  font-size:20pt;
-  height: 600px;
-
+.main-home img{
+  width: 100%;
+  height: auto;
 }
 
-.galery3 {
-margin:auto;
-  background-color:#f4f4f4;
-
-
-  height:auto;
-  max-height: 2000px;
-
+.ui.vertical.segment{
+  margin: auto !important;
 }
 
-.judul{
-   width: 600px;
-    height: 150px;
-    padding-left: 150px;
-    padding-top: 80px;
-  color: white;
-  font-size:18pt;
-  font-family: Comic Sans MS;
-  text-align:justify;
-
-
-}
-.judul img{
-  padding-left: 750px;
-}
-
-.isi{
-   width: 600px;
-    height: 100px;
-    padding-left: 150px;
-    padding-top: 60px;
-  color: white;
-  font-size:12pt;
-  font-family: Comic Sans MS;
-  text-align:justify;
-
-
-}
-
-.isi a{
-height: 40px;
-width: 200px;
-background-color: black;
-border:0px;
-
-}
-
-
-    /* Set height of the grid so .sidenav can be 100% (adjust as needed) */
-    .row.content {height:700px}
-
-    /* Set gray background color and 100% height */
-    .sidenav {
-      padding-top: 20px;
-      background-color: #f1f1f1;
-      height: 100%;
-    }
 
     /* Set black background color, white text and some padding */
     footer {
 
-    padding-top: 40px;
        bottom:0;
       width:100%;
-      background-color:black;
-      height: 100px;
+      background-color:#113A8C;
       color: white;
-
-
+      height: 100%;
+      display: flex !important;
+      align-items: center;
     }
 
-    /* On small screens, set height to 'auto' for sidenav and grid */
-    @media screen and (max-width: 767px) {
-      .sidenav {
-        height: auto;
-        padding: 15px;
-      }
-      .row.content {height:auto;}
+    footer p{
+      font-size: 18px;
+      margin: auto;
+      font-weight: bold;
     }
- .modal-header, h4, .close {
-      background-color: #4E931C;
-      color:white !important;
-      text-align: center;
-      font-size: 30px;
-  }
