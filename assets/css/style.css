@@ -44,6 +44,14 @@ body{
   width: 100%;
 }
 
+.main-login{
+  display: grid !important;
+  grid-template-columns: minmax(250px ,350px)  !important; 
+  justify-content: space-around !important;
+  margin: auto !important;
+  width: 100%;
+}
+
 .main-home img{
   width: 100%;
   max-width: 500px;
@@ -52,6 +60,16 @@ body{
 
 .ui.vertical.segment{
   margin: auto !important;
+}
+
+.container-button{
+  display: flex;
+  align-items: center;
+  gap: 15px;
+}
+
+.btn-primary {
+  height: 36px !important;
 }
 
 
@@ -72,6 +90,17 @@ body{
       font-size: 18px;
       margin: auto;
       font-weight: bold;
+    }
+
+    .main-login h1.ui.header{
+      text-align: center;
+      color: #113A8C !important;
+      font-weight: bold;
+    }
+
+    .main-login label{
+      font-weight: 500 !important;
+      color: #113A8C !important;
     }
 
     @media only screen and (max-width: 1150px) {

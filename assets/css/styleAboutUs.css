@@ -5,8 +5,12 @@ main{
     align-content: center;
     text-align: center;
     grid-template-columns: auto;
-    gap: 30px;
+    gap: 20px;
     /* grid-template-rows: 80px auto; */
+}
+
+main div , main p{
+  color: #113A8C !important;
 }
 
 .toast:not(.show){

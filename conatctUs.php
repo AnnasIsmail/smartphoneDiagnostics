@@ -18,7 +18,7 @@
 
 <nav class="navbar navbar-expand-lg ">
   <div class="container-fluid">
-    <a class="navbar-brand" href="#">
+    <a class="navbar-brand" href="index.php">
     <img src="img/logo-navbar.png" alt="" width="28" height="30" class="d-inline-block align-text-top">
       Diagnosis Smartphone
     </a>
@@ -68,39 +68,6 @@
 
 </main>
 
-
-<!-- Button trigger modal -->
-<button hidden type="button" id="modalLogin" class="btn btn-primary" data-bs-toggle="modal" data-bs-target="#exampleModal">
-</button>
-
-<!-- Modal -->
-<div class="modal fade " id="exampleModal" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
-  <div class="modal-dialog">
-    <div class="modal-content">
-      <div class="modal-header">
-        <h5 class="modal-title" id="exampleModalLabel">Login</h5>
-        <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
-      </div>
-      <div class="modal-body">
-      <form role="form" method="post" action="ceklogin.php">
-            <div class="form-group" method="post">
-              <label for="username"><span class="glyphicon glyphicon-user"></span> <b> Username </b></label>
-              <input type="text" class="form-control" name="username" id="password" placeholder="Enter username">
-            </div>
-            <div class="form-group" method="post">
-              <label for="password"><span class="glyphicon glyphicon-eye-open"></span> <b> Password </b></label>
-              <input type="password" class="form-control" name="password" id="password" placeholder="Enter password">
-            </div>
-              <button hidden type="submit" id="submit" nama="submit" class="btn btn-primary btn-block" method="post"><span class="glyphicon glyphicon-off"></span> Login</button>
-          </form>
-      </div>
-      <div class="modal-footer">
-        <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Close</button>
-        <button type="button" class="btn btn-primary" onclick="document.getElementById('submit').click()">Save changes</button>
-      </div>
-    </div>
-  </div>
-</div>
 
 <script>
 $(document).ready(function(){
