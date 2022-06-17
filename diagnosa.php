@@ -4,7 +4,36 @@ include('koneksi.php');
 if(isset($_SESSION['login_user'])){
 header("location: about.php");
 }
+
+echo"<script>var gejala = [];var basisPengetahuan = [];var kerusakan = []; var caraMengatasi = [];</script>";
+
+
+$queryGejala ="select * from gejala";
+$getDataGejala = mysqli_query($konek_db,$queryGejala);
+while(  $hasil = mysqli_fetch_row($getDataGejala)){
+  echo"<script>gejala.push({id:'$hasil[0]',gejala:'$hasil[1]',jenishp:'$hasil[2]'})</script>";
+}
+
+$queryBasisPengetahuan ="select * from basispengetahuan";
+$getDataBasisPengetahuan = mysqli_query($konek_db,$queryBasisPengetahuan);
+while(  $hasil = mysqli_fetch_row($getDataBasisPengetahuan)){
+  echo"<script>basisPengetahuan.push({namaKerusakan:'$hasil[0]',gejala:'$hasil[1]'})</script>";
+}
+
+$queryKerusakan ="select * from kerusakan";
+$getDataKerusakan = mysqli_query($konek_db,$queryKerusakan);
+while(  $hasil = mysqli_fetch_row($getDataKerusakan)){
+  echo"<script>kerusakan.push({id:'$hasil[0]',namaKerusakan:'$hasil[1]',jenishp:'$hasil[2]'})</script>";
+}
+
+$queryCaraMengatasi ="select * from caramengatasi";
+$getDataCaraMengatasi = mysqli_query($konek_db,$queryCaraMengatasi);
+while(  $hasil = mysqli_fetch_row($getDataCaraMengatasi)){
+  echo"<script>caraMengatasi.push({id:'$hasil[0]',caraMengatasi:'$hasil[1]'})</script>";
+}
+
 ?>
+
 <!DOCTYPE html>
 <html lang="en">
 <head>
@@ -16,11 +45,9 @@ header("location: about.php");
   <link rel="stylesheet" href="assets/css/styleDiagnosa.css?v=<?php echo time(); ?>">
   <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/semantic-ui/2.4.1/semantic.min.css" integrity="sha512-8bHTC73gkZ7rZ7vpqUQThUDhqcNFyYi2xgDgPDHc+GXVGHXq+xPjynxIopALmOPqzo9JZj0k6OqqewdGO3EsrQ==" crossorigin="anonymous" referrerpolicy="no-referrer" />
   <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.2.0-beta1/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-0evHe/X+R7YkIZDRvuzKMRqM+OrBnVFBL6DOitfPri4tjfHxaWutUpFmBp4vmVor" crossorigin="anonymous">
+  <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bulma@0.9.4/css/bulma.min.css">
 
-  <!-- <link rel="stylesheet" href="assets/css/style.css"> -->
-  <!-- <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.1.1/jquery.min.js"></script> -->
-  <!-- <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/js/bootstrap.min.js"></script> -->
-  <link rel="icon" href="img/2.png">
+<link rel="icon" href="img/logo.png">
 </head>
 <body>
 
@@ -45,109 +72,106 @@ header("location: about.php");
   </div>
 </nav>
 
+<main class="main-diagnosa">
+  <div>
+    <h1 class="ui header">Diagnosa Kerusakan</h1>
 
-<!--   Akhir bagian Menu pada Header -->
-<div class="container-fluid">
-
-
-<div class="dropdown">
-  <button class="btn btn-secondary dropdown-toggle" type="button" id="dropdownMenuButton1" data-bs-toggle="dropdown" aria-expanded="false">
-    Pilih Jenis Hp
-  </button>
-  <ul class="dropdown-menu" aria-labelledby="dropdownMenuButton1">
-    <li><a class="dropdown-item" href="#">Pilih</a></li>
-    <li><a class="dropdown-item" href="#">Android</a></li>
-  </ul>
-</div>
-    <div class="col-sm-8 text-left">
-      <center><h2>DIAGNOSA KERUSAKAN</h2></center>
-        <form id="form1" name="form1" method="post" action="diagnosa.php">
-				<label for="sel1">Jenis Hp</label>
-				<select class="form-control" name="hp" onChange='this.form.submit();'>
-				<option>Pilih</option>
-                <option>ANDROID</option>
-  		</select>
-              </form>
-       <br>
-        <form id="form2" name="form2" method="post" action="diagnosa.php">
- 			<?php
-            if(isset($_POST['hp']))
-                  if($_POST['hp']!="jenishp"){
-                echo  "<br><label>Ciri Kerusakan</label><br>";
- 			$tampil="select * from gejala where  jenishp= \"".$_POST['hp']."\"";
-			$query= mysqli_query($konek_db,$tampil);
-                while($hasil=mysqli_fetch_array($query)){
-					echo "<input type='checkbox' value='".$hasil['gejala']."' name='gejala[]' /> ".$hasil['gejala']."<br>";
-			}
-                  }
-					?>
-
-
-        <br>
-        <button type="submit" name ="submit" onclick="return checkDiagnosa()" class="btn btn-primary">CEK Kerusakan</button><br><br>
-            <div class="panel panel-info">
-                <div class="panel-heading">HASIL DIAGNOSA</div>
-                <div class="panel-body">
-            <div class="box-body table-responsive">
-                <table id="example1" class="table table-bordered table-striped">
-                    <thead>
-                        <tr>
-                            <th>NO</th>
-                            <th>ID Kerusakan</th>
-							<th>Nama Kerusakan</th>
-                            <th>Jenis hp</th>
-                            <th>Detail</th>
-                        </tr>
-                    </thead>
-         <?php
-        if(isset($_POST['submit'])){
-            $gejala = $_POST['gejala'];
-            $jumlah_dipilih = count($gejala);
-           for($x=0;$x<$jumlah_dipilih;$x++){
-                       $tampil ="select DISTINCT p.idkerusakan, p.namakerusakan, p.jenishp from basispengetahuan b, kerusakan p where b.gejala='$gejala[$x]' and p.namakerusakan=b.namakerusakan group by namakerusakan";
-                       $result = mysqli_query($konek_db, $tampil);
-                       $hasil  = mysqli_fetch_array($result);
-
-                    }
-               echo "
-                           <tr>
-        			             <td>".$x."</td>
-                                 <td>".$hasil['idkerusakan']."</td>
-					             <td>".$hasil['namakerusakan']."</td>
-                                 <td>".$hasil['jenishp']."</td>
-                                 <td><a href=\"hasildiagnosa.php?id=".$hasil['idkerusakan']."\"><i class='glyphicon glyphicon-search'></i></a></td>
-        		          </tr>
-
-                               ";
-        }
-
-                ?>
-                    </table>
-            </div>
-                    </div>
-                </div>
-        </form>
-
-    </div>
+    <div class="control has-icons-left">
+  <div class="select">
+    <select class="dropdown" onchange="showCiriKerusakan()" id="selectJenisHP">
+      <option selected>Pilih Jenis Handphone</option>
+      <option>Android</option>
+    </select>
+  </div>
+  <div class="icon is-small is-left">
+    <i class="large mobile icon"></i>
   </div>
 </div>
+  </div>
+
+  <div class="ciri-kerusakan">
+
+  </div>
+
+  <table class="table">
 
 
-</div>
+</table>
 
+</main>
 
 
 <footer class="container-fluid text-center">
   <p>Diagnosis Smartphone, Copyright 2022 &copy;</p>
 </footer>
 
-<script language="JavaScript" type="text/javascript">
+<script>
 
-function checkDiagnosa(){
-    return confirm('Apakah sudah benar gejalanya?');
+let indexChooseTrue = [];
+
+function showCiriKerusakan(){
+  let selectJenisHP = document.getElementById('selectJenisHP')
+  console.log(selectJenisHP.value);
+  console.log(kerusakan);
+  console.log(basisPengetahuan);
+  console.log(caraMengatasi);
+
+  $('.ciri-kerusakan').empty().append(`    
+  <h4 class="ui header">Ciri Kerusakan</h4>
+    <div class="content-ciri-kerusakan">
+
+    </div>
+    <button class="button is-link">Cek Kerusakan</button>
+    `);
+
+  gejala.map((data , index)=>{
+    $(".content-ciri-kerusakan").append(`
+    <div class="form-check form-switch">
+        <input class="form-check-input" type="checkbox" role="switch" id="ciriKerusakan${data.id}">
+        <label class="form-check-label" for="ciriKerusakan${data.id}">${data.gejala}</label>
+      </div>
+    `);
+  })
+  showTable();
 }
-</script>
-<script src="https://cdn.jsdelivr.net/npm/bootstrap@5.2.0-beta1/dist/js/bootstrap.bundle.min.js" integrity="sha384-pprn3073KE6tl6bjs2QrFaJGz5/SUsLqktiwsUTF55Jfv3qYSDhgCecCxMW52nD2" crossorigin="anonymous"></script>
 
+function showTable(){
+
+  $('.table').empty().append(`
+  <thead>
+    <tr>
+      <th>No</th>
+      <th>ID Kerusakan</th>
+      <th>Nama Kerusakan</th>
+      <th>Jenis HP</th>
+      <th>Detail</th>
+    </tr>
+  </thead>
+
+  <tbody>
+
+
+  </tbody>
+  `);
+
+  kerusakan.map((data , index)=>{
+    $('tbody').append(`
+    <tr>
+        <th>${index+1}</th>
+        <td>${data.id}</td>
+        <td>${data.namaKerusakan}</td>
+        <td>${data.jenishp}</td>
+        <td> <a>Lihat Detail</a> </td>
+      </tr>
+    `);
+  })
+
+
+}
+
+</script>
+
+<script src="https://cdn.jsdelivr.net/npm/bootstrap@5.2.0-beta1/dist/js/bootstrap.bundle.min.js" integrity="sha384-pprn3073KE6tl6bjs2QrFaJGz5/SUsLqktiwsUTF55Jfv3qYSDhgCecCxMW52nD2" crossorigin="anonymous"></script>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.6.0/jquery.min.js" integrity="sha512-894YE6QWD5I59HgZOGReFYm4dnWc1Qt5NtvYSaNcOP+u1T9qYdvdihz0PPSiiqn/+/3e7Jo4EaG7TubfWGUrMQ==" crossorigin="anonymous" referrerpolicy="no-referrer"></script>
 </body>
 </html>

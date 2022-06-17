@@ -1,0 +1,155 @@
+html,body{
+overflow: auto !important;
+}
+
+main{
+    display: flex !important;
+    /* justify-content: center; */
+    flex-direction: column;
+    grid-template-columns: 1fr;
+    grid-template-rows: max-content;
+    gap: 10px;
+    min-width: 400px;
+    width: 70%;
+    margin: 20px auto;
+}
+
+main div{
+
+}
+
+main h1{
+    text-align: center;
+}
+
+.has-icons-left{
+    display: grid;
+}
+
+.dropdown{
+    width: 100% !important;
+    color: #485fc7 !important;
+    font-weight: 500;
+
+}
+
+#dropdownMenuButton1{
+    width: 100%;
+}
+
+.main-diagnosa label{
+    font-weight: 400;
+    margin: 0;
+}
+
+.form-switch{
+    display: flex !important;
+    align-content: center;
+    align-items: center;
+    gap: 10px;
+}
+
+.form-switch .form-check-input{
+    width: 40px !important; 
+    height: 20px;
+}
+
+.mobile{
+    color: #485fc7 !important;
+    padding-top: 8px;
+
+}
+
+nav{
+    font-size: 14px !important;
+}
+
+.navbar-brand{
+    display: block !important;
+    padding-top: 8px !important;
+}
+
+.ciri-kerusakan .is-link{
+    margin-top: 10px;
+    font-weight: 500 !important;
+}
+
+/* 
+<div class="container-fluid">
+
+
+    <div class="col-sm-8 text-left">
+      <center><h2>DIAGNOSA KERUSAKAN</h2></center>
+        <form id="form1" name="form1" method="post" action="diagnosa.php">
+				<label for="sel1">Jenis Hp</label>
+				<select class="form-control" name="hp" onChange='this.form.submit();'>
+				<option>Pilih</option>
+                <option>ANDROID</option>
+  		</select>
+              </form>
+       <br>
+        <form id="form2" name="form2" method="post" action="diagnosa.php">
+ 			<?php
+            if(isset($_POST['hp']))
+                  if($_POST['hp']!="jenishp"){
+                echo  "<br><label>Ciri Kerusakan</label><br>";
+ 			$tampil="select * from gejala where  jenishp= \"".$_POST['hp']."\"";
+			$query= mysqli_query($konek_db,$tampil);
+                while($hasil=mysqli_fetch_array($query)){
+					echo "<input type='checkbox' value='".$hasil['gejala']."' name='gejala[]' /> ".$hasil['gejala']."<br>";
+			}
+                  }
+					?>
+
+
+        <br>
+        <button type="submit" name ="submit" onclick="return checkDiagnosa()" class="btn btn-primary">CEK Kerusakan</button><br><br>
+            <div class="panel panel-info">
+                <div class="panel-heading">HASIL DIAGNOSA</div>
+                <div class="panel-body">
+            <div class="box-body table-responsive">
+                <table id="example1" class="table table-bordered table-striped">
+                    <thead>
+                        <tr>
+                            <th>NO</th>
+                            <th>ID Kerusakan</th>
+							<th>Nama Kerusakan</th>
+                            <th>Jenis hp</th>
+                            <th>Detail</th>
+                        </tr>
+                    </thead>
+         <?php
+        if(isset($_POST['submit'])){
+            $gejala = $_POST['gejala'];
+            $jumlah_dipilih = count($gejala);
+           for($x=0;$x<$jumlah_dipilih;$x++){
+                       $tampil ="select DISTINCT p.idkerusakan, p.namakerusakan, p.jenishp from basispengetahuan b, kerusakan p where b.gejala='$gejala[$x]' and p.namakerusakan=b.namakerusakan group by namakerusakan";
+                       $result = mysqli_query($konek_db, $tampil);
+                       $hasil  = mysqli_fetch_array($result);
+
+                    }
+               echo "
+                           <tr>
+        			             <td>".$x."</td>
+                                 <td>".$hasil['idkerusakan']."</td>
+					             <td>".$hasil['namakerusakan']."</td>
+                                 <td>".$hasil['jenishp']."</td>
+                                 <td><a href=\"hasildiagnosa.php?id=".$hasil['idkerusakan']."\"><i class='glyphicon glyphicon-search'></i></a></td>
+        		          </tr>
+
+                               ";
+        }
+
+                ?>
+                    </table>
+            </div>
+                    </div>
+                </div>
+        </form>
+
+    </div>
+  </div>
+</div>
+
+
+</div> */
