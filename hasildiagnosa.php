@@ -11,71 +11,56 @@ header("location: about.php");
   <title>Sistem Pakar</title>
   <meta charset="utf-8">
   <meta name="viewport" content="width=device-width, initial-scale=1">
-  <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css">
-  <link rel="stylesheet" href="assets/css/style.css">
+  <!-- <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css"> -->
+  <link rel="stylesheet" href="assets/css/style.css?v=<?php echo time(); ?>">
+  <link rel="stylesheet" href="assets/css/styleHasilDiagnosa.css?v=<?php echo time(); ?>">
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/semantic-ui/2.4.1/semantic.min.css" integrity="sha512-8bHTC73gkZ7rZ7vpqUQThUDhqcNFyYi2xgDgPDHc+GXVGHXq+xPjynxIopALmOPqzo9JZj0k6OqqewdGO3EsrQ==" crossorigin="anonymous" referrerpolicy="no-referrer" />
+  <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.2.0-beta1/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-0evHe/X+R7YkIZDRvuzKMRqM+OrBnVFBL6DOitfPri4tjfHxaWutUpFmBp4vmVor" crossorigin="anonymous">
+  <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bulma@0.9.4/css/bulma.min.css">
   <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.1.1/jquery.min.js"></script>
   <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/js/bootstrap.min.js"></script>
-  <link rel="icon" href="img/2.png">
+<link rel="icon" href="img/logo.png">
 </head>
 <body>
 
-<div class="menu">
-    <a href="index.php">
-      <h3> <font color="#4E931C">Exsyt </font>Phone</h3>
+<nav class="navbar navbar-expand-lg ">
+  <div class="container-fluid">
+    <a class="navbar-brand" href="#">
+    <img src="img/logo-navbar.png" alt="" width="28" height="30" class="d-inline-block align-text-top">
+      Diagnosis Smartphone
     </a>
-
-<!--   untuk menu pada bagian header -->
-  <ul>
-      <p>
-        <button type="button" class="btn btn-primary   btn-block" id="myBtn">LOGIN</button>
-      </p>
-  </ul>
-<ul>
-  <p><a href="kerusakan.php"><button type="button" class="btn btn-primary btn-block">DAFTAR KERUSAKAN</button></a></p>
-</ul>
-
-  <ul>
-   <p>
-    <a href="diagnosa.php">
-      <button type="button" class="btn btn-primary btn-block">DIAGNOSA KERUSAKAN</button>
-    </a>
-  </p>
- </ul>
-
-  <ul>
-    <p>
-      <a href="about.php">
-        <button type="button" class="btn btn-primary btn-block">ABOUT</button>
-      </a>
-    </p>
-  </ul>
-
-  <ul>
-   <p>
-    <a href="index.php">
-      <button type="button" class="btn btn-primary btn-block">HOME</button>
-    </a>
-  </p>
- </ul>
+    <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarNavAltMarkup" aria-controls="navbarNavAltMarkup" aria-expanded="false" aria-label="Toggle navigation">
+      <span class="navbar-toggler-icon"></span>
+    </button>
+    <div class="collapse navbar-collapse" id="navbarNavAltMarkup">
+      <div class="navbar-nav">
+        <a class="nav-link" href="index.php">Home</a>
+        <a class="nav-link" href="conatctUs.php">Contact Us</a>
+        <a class="nav-link" href="diagnosa.php">Diagnosa Kerusakan</a>
+        <a class="nav-link" href="kerusakan.php">Daftar Kerusakan</a>
+        <a class="nav-link" href="login.php">Login</a>
+      </div>
+    </div>
   </div>
+</nav>
 
 <!--   Akhir bagian Menu pada Header -->
 
 
+<main>
 
-
-<div class="container-fluid">
+<div class="container-fluid container-main">
     <div class="col-sm-8 text-left">
-      <h2 class="text-center">DETAIL DIAGNOSA</h2>
+      <h2 class="ui header">DETAIL DIAGNOSA</h2>
       <div class="form-group"  method="POST">
-      			<br><label class="control-label col-sm-2">ID :</label>
+      			<label class="control-label col-sm-2">ID :</label>
       		<div class="col-sm-10">
                 <?php
                        $tampil = "SELECT * FROM kerusakan where idkerusakan='".$_GET['id']."'";
                        $sql = mysqli_query ($konek_db,$tampil);
                        while($data = mysqli_fetch_array ($sql))
                     {
-                       echo "<input type='text'  class='form-control' id='idkerusakan' readonly value='".$data['idkerusakan']."'><br>";
+                       echo "<input type='text'  class='form-control' id='idkerusakan' readonly value='".$data['idkerusakan']."'>";
                     }
                 ?>
      		 </div>
@@ -83,14 +68,14 @@ header("location: about.php");
 
 
         <div class="form-group"  method="POST">
-      			<br><label class="control-label col-sm-2">NAMA Kerusakan:</label>
+      			<label class="control-label col-sm-2">Nama Kerusakan:</label>
       		<div class="col-sm-10">
                 <?php
                        $tampil = "SELECT * FROM kerusakan where idkerusakan='".$_GET['id']."'";
                        $sql = mysqli_query ($konek_db,$tampil);
                        while($data = mysqli_fetch_array ($sql))
                     {
-                       echo "<input type='text'  class='form-control' id='namakerusakan' readonly value='".$data['namakerusakan']."'><br>";
+                       echo "<input type='text'  class='form-control' id='namakerusakan' readonly value='".$data['namakerusakan']."'>";
                     }
                 ?>
      		 </div>
@@ -99,40 +84,40 @@ header("location: about.php");
 
 
         <div class="form-group"  method="POST">
-      			<br><label class="control-label col-sm-2">JENIS :</label>
+      			<label class="control-label col-sm-2">Jenis :</label>
       		<div class="col-sm-10">
                 <?php
                        $tampil = "SELECT * FROM kerusakan where idkerusakan='".$_GET['id']."'";
                        $sql = mysqli_query ($konek_db,$tampil);
                        while($data = mysqli_fetch_array ($sql))
                     {
-                       echo "<input type='text'  class='form-control' id='jensihp' readonly value='".$data['jenishp']."'><br>";
+                       echo "<input type='text'  class='form-control' id='jensihp' readonly value='".$data['jenishp']."'>";
                     }
                 ?>
      		 </div>
         </div>
         <div class="form-group"  method="POST">
-      			<br><label class="control-label col-sm-2">Ciri Kerusakan :</label>
+      			<label class="control-label col-sm-2">Ciri Kerusakan :</label>
       		<div class="col-sm-10">
                 <?php
                        $tampil = "SELECT * FROM kerusakan p, basispengetahuan b where p.idkerusakan='".$_GET['id']."' and p.namakerusakan=b.namakerusakan";
                        $sql = mysqli_query ($konek_db,$tampil);
                        while($data = mysqli_fetch_array ($sql))
                     {
-                       echo "<input type='text'  class='form-control' id='jenishp' readonly value='".$data['gejala']."'><br>";
+                       echo "<input type='text'  class='form-control' id='jenishp' readonly value='".$data['gejala']."'>";
                     }
                 ?>
      		 </div>
         </div>
         <div class="form-group"  method="POST">
-      			<br><label class="control-label col-sm-2">Cara Mengatasi :</label><br>
+      			<label class="control-label col-sm-2">Cara Mengatasi :</label>
       		<div class="col-sm-10">
                 <?php
-                       $tampil = "SELECT * FROM kerusakan where idkerusakan='".$_GET['id']."'";
+                       $tampil = "SELECT * FROM caramengatasi where idkerusakan='".$_GET['id']."'";
                        $sql = mysqli_query ($konek_db,$tampil);
                        while($data = mysqli_fetch_array ($sql))
                     {
-                       echo "<textarea  rows='8' class='form-control' id='penanganan'  readonly>".$data['caramengatasi']."</textarea><br>";
+                       echo "<textarea  rows='1' class='form-control' id='penanganan'  readonly>".$data['caramengatasi']."</textarea>";
                     }
                 ?>
      		 </div>
@@ -140,39 +125,20 @@ header("location: about.php");
     </div>
   </div>
 </div>
- <div class="modal fade" id="myModal" role="dialog">
-    <div class="modal-dialog">
 
-      <!-- Modal content-->
-      <div class="modal-content">
-        <div class="modal-header" style="padding:35px 50px;">
-          <button type="button" class="close" data-dismiss="modal">&times;</button>
-          <h4><span class="glyphicon glyphicon-lock"></span> Login</h4>
-        </div>
-        <div class="modal-body" style="padding:40px 50px;">
-         <form role="form" method="post" action="ceklogin.php">
-            <div class="form-group" method="post">
-              <label for="username"><span class="glyphicon glyphicon-user"></span> Username</label>
-              <input type="text" class="form-control" name="username" id="password" placeholder="Enter username">
-            </div>
-            <div class="form-group" method="post">
-              <label for="password"><span class="glyphicon glyphicon-eye-open"></span> Password</label>
-              <input type="password" class="form-control" name="password" id="password" placeholder="Enter password">
-            </div>
-              <button type="submit" id="submit" nama="submit" class="btn btn-primary btn-block" method="post"><span class="glyphicon glyphicon-off"></span> Login</button>
-          </form>
-        </div>
-      </div>
-    </div>
-  </div>
+</main>
+
+<footer class="container-fluid text-center">
+  <p>Diagnosis Smartphone, Copyright 2022 &copy;</p>
+</footer>
 
 <script>
-$(document).ready(function(){
-    $("#myBtn").click(function(){
-        $("#myModal").modal();
-    });
-});
+
 </script>
+
+<script src="https://cdn.jsdelivr.net/npm/bootstrap@5.2.0-beta1/dist/js/bootstrap.bundle.min.js" integrity="sha384-pprn3073KE6tl6bjs2QrFaJGz5/SUsLqktiwsUTF55Jfv3qYSDhgCecCxMW52nD2" crossorigin="anonymous"></script>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.6.0/jquery.min.js" integrity="sha512-894YE6QWD5I59HgZOGReFYm4dnWc1Qt5NtvYSaNcOP+u1T9qYdvdihz0PPSiiqn/+/3e7Jo4EaG7TubfWGUrMQ==" crossorigin="anonymous" referrerpolicy="no-referrer"></script>
+
 
 </body>
 </html>

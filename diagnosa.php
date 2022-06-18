@@ -40,9 +40,8 @@ while(  $hasil = mysqli_fetch_row($getDataCaraMengatasi)){
   <title>Sistem Pakar</title>
   <meta charset="utf-8">
   <meta name="viewport" content="width=device-width, initial-scale=1">
-  <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css">
-  <link rel="stylesheet" href="assets/css/style.css?v=<?php echo time(); ?>">
   <link rel="stylesheet" href="assets/css/styleDiagnosa.css?v=<?php echo time(); ?>">
+  <link rel="stylesheet" href="assets/css/style.css?v=<?php echo time(); ?>">
   <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/semantic-ui/2.4.1/semantic.min.css" integrity="sha512-8bHTC73gkZ7rZ7vpqUQThUDhqcNFyYi2xgDgPDHc+GXVGHXq+xPjynxIopALmOPqzo9JZj0k6OqqewdGO3EsrQ==" crossorigin="anonymous" referrerpolicy="no-referrer" />
   <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.2.0-beta1/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-0evHe/X+R7YkIZDRvuzKMRqM+OrBnVFBL6DOitfPri4tjfHxaWutUpFmBp4vmVor" crossorigin="anonymous">
   <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bulma@0.9.4/css/bulma.min.css">
@@ -123,22 +122,22 @@ function changeCheckbox(id){
     indexChooseTrue = [];
     indexChooseTrue = indexSementara;
   }
-  console.log(indexChooseTrue);
 }
 
 function showCiriKerusakan(){
-  let selectJenisHP = document.getElementById('selectJenisHP')
-  console.log(selectJenisHP.value);
-  console.log(kerusakan);
-  console.log(basisPengetahuan);
-  console.log(caraMengatasi);
+  $('.table').empty();
+  $('.ciri-kerusakan').empty();
+  indexChooseTrue = [];
+  let selectJenisHP = document.getElementById('selectJenisHP').value
+  console.log(selectJenisHP)
+  if(selectJenisHP !== "Pilih Jenis Handphone"){
 
   $('.ciri-kerusakan').empty().append(`    
   <h4 class="ui header">Ciri Kerusakan</h4>
     <div class="content-ciri-kerusakan">
 
     </div>
-    <button class="button is-link">Cek Kerusakan</button>
+    <button class="button is-link" onclick="showTable()">Cek Kerusakan</button>
     `);
 
   gejala.map((data , index)=>{
@@ -149,11 +148,23 @@ function showCiriKerusakan(){
       </div>
     `);
   })
+
+}
+
 }
 
 function showTable(){
 
-  $('.table').empty().append(`
+  $('.ciri-kerusakan').empty().append(`    
+  <h4 class="ui header">Ciri Kerusakan</h4>
+    <div class="content-ciri-kerusakan">
+
+    </div>
+    <button class="button is-link" onclick="showTable()">Cek Kerusakan</button>
+    `);
+
+
+    $('.table').empty().append(`
   <thead>
     <tr>
       <th>No</th>
@@ -170,17 +181,31 @@ function showTable(){
   </tbody>
   `);
 
-  kerusakan.map((data , index)=>{
-    $('tbody').append(`
-    <tr>
-        <th>${index+1}</th>
-        <td>${data.id}</td>
-        <td>${data.namaKerusakan}</td>
-        <td>${data.jenishp}</td>
-        <td> <a>Lihat Detail</a> </td>
-      </tr>
+
+    indexChooseTrue.map((dataIndex , index)=>{
+      let data = gejala.find(data=> data.id===dataIndex);
+      $(".content-ciri-kerusakan").append(`
+      <div class="form-check form-switch">
+        <input class="form-check-input" onchange="changeCheckbox('${data.id}')" type="checkbox" role="switch" id="ciriKerusakan${data.id}" checked disabled>
+        <label class="form-check-label" for="ciriKerusakan${data.id}">${data.gejala}</label>
+      </div>
     `);
-  })
+    let pengetahuan = basisPengetahuan.find(dataPengetahuan=>dataPengetahuan.gejala === data.gejala)
+    let dataKerusakan = kerusakan.find(dataKeru => dataKeru.namaKerusakan === pengetahuan.namaKerusakan)
+    console.log(dataKerusakan);
+        $('tbody').append(`
+        <tr>
+            <th>${index+1}</th>
+            <td>${data.id}</td>
+            <td>${pengetahuan.namaKerusakan}</td>
+            <td>${data.jenishp}</td>
+            <td><a href=\"hasildiagnosa.php?id=${dataKerusakan.id}">Lihat Detail</a></td>
+          </tr>
+        `);
+
+    })
+
+
 
 
 }
@@ -189,5 +214,6 @@ function showTable(){
 
 <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.2.0-beta1/dist/js/bootstrap.bundle.min.js" integrity="sha384-pprn3073KE6tl6bjs2QrFaJGz5/SUsLqktiwsUTF55Jfv3qYSDhgCecCxMW52nD2" crossorigin="anonymous"></script>
 <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.6.0/jquery.min.js" integrity="sha512-894YE6QWD5I59HgZOGReFYm4dnWc1Qt5NtvYSaNcOP+u1T9qYdvdihz0PPSiiqn/+/3e7Jo4EaG7TubfWGUrMQ==" crossorigin="anonymous" referrerpolicy="no-referrer"></script>
+
 </body>
 </html>

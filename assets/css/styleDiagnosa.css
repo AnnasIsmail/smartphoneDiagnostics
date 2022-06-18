@@ -26,6 +26,10 @@ main h1{
     display: grid;
 }
 
+.table td a {
+    color: #485fc7 !important;
+}
+
 .dropdown{
     width: 100% !important;
     color: #485fc7 !important;
