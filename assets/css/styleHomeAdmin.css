@@ -52,6 +52,37 @@ nav{
     margin-bottom: 10px;
 }
 
+.content-right{
+    display: grid !important;
+    grid-template-columns: 450px 400px;
+    justify-content: space-between;
+    margin: auto 50px;
+}
+
+.content-data-kerusakan{
+    display: grid !important;
+    grid-template-columns: 1fr;
+    grid-template-rows: 40px 50px max-content;
+    margin: 20px;
+}
+
+.content-data-kerusakan h2{
+    text-align: center;
+    color: #485fc7 !important;
+}
+
+.content-data-kerusakan .button{
+    color: white !important;
+    background-color:  #485fc7 !important;
+    border: 2px white solid !important;
+    padding: 10px !important;
+    border-radius: 6px !important;
+}
+
+.content-data-kerusakan .table thead th{
+    color: #485fc7 !important;
+}
+
   footer {
 
     bottom:0;

@@ -25,31 +25,31 @@ include "session.php";
         Hello, <?php echo $login_session; ?>
       </p>
     
-      <a class="panel-block is-active">
+      <a href="homeadmin.php" class="panel-block is-active">
         <span class="panel-icon">
           <i class="icon home large" aria-hidden="true"></i>
         </span>
         Beranda
       </a>
-      <a class="panel-block">
+      <a href="daftarkerusakan.php" class="panel-block">
         <span class="panel-icon">
           <i class="icon bug large" aria-hidden="true"></i>
         </span>
         Kerusakan
       </a>
-      <a class="panel-block">
+      <a href="gejala.php" class="panel-block">
         <span class="panel-icon">
           <i class="stethoscope large icon" aria-hidden="true"></i>
         </span>
         Ciri Kerusakan
       </a>
-      <a class="panel-block">
+      <a href="basispengetahuan.php" class="panel-block">
         <span class="panel-icon">
           <i class="book icon large" aria-hidden="true"></i>
         </span>
         Basis Pengetahuan
       </a>
-      <a class="panel-block">
+      <a href="caramengatasi.php" class="panel-block">
         <span class="panel-icon">
           <i class="first aid large icon" aria-hidden="true"></i>
         </span>
@@ -58,58 +58,29 @@ include "session.php";
     </div>
   
     <div class="panel-block log-out">
-      <button class="button is-link is-outlined is-fullwidth">
+      <button class="button is-link is-outlined is-fullwidth" onclick="document.getElementById('gotoHome').click()">
         Log Out
       </button>
+      <a href="index.php" id="gotoHome"></a>
     </div>
   </nav>
 
-  <div>
-
+  <div class="content-right">
+  <div class="ui sizer vertical segment">
+    <div class="ui huge header">Selamat Datang Admin Diagnosis Smartphone</div>
+      <p>Diagnosisi Smartphone merupakan Sistem Pakar kerusakan pada smartphone Pada Android.Memudahkan orang awam dalam mengetahui kerusakan-kerusakan pada smartphone android.Serta Memberikan solusi kepada user mengenai tindakan apa yang harus dilakukan</p>
+    </div>
+    <img src="img/home pict.png">
   </div>
 </main>
-
-
-
-<!-- <nav class="navbar navbar-inverse">
-  <div class="container-fluid">
-    <div class="navbar-header">
-      <button type="button" class="navbar-toggle" data-toggle="collapse" data-target="#myNavbar">
-        <span class="icon-bar"></span>
-        <span class="icon-bar"></span>
-        <span class="icon-bar"></span>
-      </button>
-    </div>
-    <div class="collapse navbar-collapse" id="myNavbar">
-      <ul class="nav navbar-nav">
-      </ul>
-      <ul class="nav navbar-nav navbar-right">
-      </ul>
-    </div>
-  </div>
-</nav>
-
-<div class="container-fluid text-center">
-  <div class="row content">
-    <div class="col-sm-2 sidenav">
-      <p><a href="homeadmin.php"><button type="button" class="btn btn-primary btn-block active">BERANDA</button></a></p>
-      <p><a href="daftarkerusakan.php"><button type="button" class="btn btn-primary btn-block">KERUSAKAN</button></a></p>
-      <p><a href="gejala.php"><button type="button" class="btn btn-primary btn-block">CIRI KERUSAKAN</button></a></p>
-        <p><a href="basispengetahuan.php"><button type="button" class="btn btn-primary btn-block">BASIS PENGETAHUAN</button></a></p>
-      <br><br><br><br><br><br><br><br><br><br>
-      <p><a href="logout.php"><button type="button" class="btn btn-primary btn-block" id="myBtn">LOGOUT</button></a></p>
-    </div>
-    <div class="col-sm-8 text-left">
-       <center><h2>SISTEM PAKAR DIAGNOSA KERUSAKAN SMARTPHONE ANDROID
-</h2></center><br>
-      <p>Selamat datang <?php echo $login_session; ?>.Silahkan pilih menu yang diinginkan</p>
-    </div>
-  </div>
-</div> -->
 
 <footer class="container-fluid text-center">
   <p>Diagnosis Smartphone, Copyright 2022 &copy;</p>
 </footer>
+
+<script src="https://cdn.jsdelivr.net/npm/bootstrap@5.2.0-beta1/dist/js/bootstrap.bundle.min.js" integrity="sha384-pprn3073KE6tl6bjs2QrFaJGz5/SUsLqktiwsUTF55Jfv3qYSDhgCecCxMW52nD2" crossorigin="anonymous"></script>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.6.0/jquery.min.js" integrity="sha512-894YE6QWD5I59HgZOGReFYm4dnWc1Qt5NtvYSaNcOP+u1T9qYdvdihz0PPSiiqn/+/3e7Jo4EaG7TubfWGUrMQ==" crossorigin="anonymous" referrerpolicy="no-referrer"></script>
+
 
 </body>
 </html>
