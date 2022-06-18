@@ -109,6 +109,23 @@ while(  $hasil = mysqli_fetch_row($getDataCaraMengatasi)){
 
 let indexChooseTrue = [];
 
+function changeCheckbox(id){
+  var checkedValue = $(`#ciriKerusakan${id}:checked`).val();
+  if (checkedValue === 'on'){
+    indexChooseTrue.push(id);
+  }else if(checkedValue === undefined){
+    indexSementara = [];
+    indexChooseTrue.map((data , index)=>{
+      if (data !== id){
+        indexSementara.push(data);
+      }
+    })
+    indexChooseTrue = [];
+    indexChooseTrue = indexSementara;
+  }
+  console.log(indexChooseTrue);
+}
+
 function showCiriKerusakan(){
   let selectJenisHP = document.getElementById('selectJenisHP')
   console.log(selectJenisHP.value);
@@ -127,12 +144,11 @@ function showCiriKerusakan(){
   gejala.map((data , index)=>{
     $(".content-ciri-kerusakan").append(`
     <div class="form-check form-switch">
-        <input class="form-check-input" type="checkbox" role="switch" id="ciriKerusakan${data.id}">
+        <input class="form-check-input" onchange="changeCheckbox('${data.id}')" type="checkbox" role="switch" id="ciriKerusakan${data.id}">
         <label class="form-check-label" for="ciriKerusakan${data.id}">${data.gejala}</label>
       </div>
     `);
   })
-  showTable();
 }
 
 function showTable(){
