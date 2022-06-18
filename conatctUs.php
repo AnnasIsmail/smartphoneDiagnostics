@@ -50,15 +50,15 @@
     <div class="toast-body">
     <button class="ui instagram button">
       <i class="instagram icon"></i>
-        ariefadji
+        @ariefadji
       </button>
-      <button class="ui twitter button">
-      <i class="twitter icon"></i>
-      ariefAdjie
-    </button>
+      <button class="ui google plus button">
+  <i class="google plus icon"></i>
+  ariefadjinugroho515@gmail.com
+</button>
     <button class="ui facebook button">
   <i class="facebook icon"></i>
-  Arief Adjie Nugroho
+  Arief Adji
 </button>
     </div>
   </div>

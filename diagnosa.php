@@ -129,7 +129,6 @@ function showCiriKerusakan(){
   $('.ciri-kerusakan').empty();
   indexChooseTrue = [];
   let selectJenisHP = document.getElementById('selectJenisHP').value
-  console.log(selectJenisHP)
   if(selectJenisHP !== "Pilih Jenis Handphone"){
 
   $('.ciri-kerusakan').empty().append(`    
@@ -141,12 +140,14 @@ function showCiriKerusakan(){
     `);
 
   gejala.map((data , index)=>{
-    $(".content-ciri-kerusakan").append(`
-    <div class="form-check form-switch">
-        <input class="form-check-input" onchange="changeCheckbox('${data.id}')" type="checkbox" role="switch" id="ciriKerusakan${data.id}">
-        <label class="form-check-label" for="ciriKerusakan${data.id}">${data.gejala}</label>
-      </div>
-    `);
+    if(data.jenishp === selectJenisHP){
+      $(".content-ciri-kerusakan").append(`
+      <div class="form-check form-switch">
+          <input class="form-check-input" onchange="changeCheckbox('${data.id}')" type="checkbox" role="switch" id="ciriKerusakan${data.id}">
+          <label class="form-check-label" for="ciriKerusakan${data.id}">${data.gejala}</label>
+        </div>
+      `);
+    }
   })
 
 }
@@ -192,7 +193,6 @@ function showTable(){
     `);
     let pengetahuan = basisPengetahuan.find(dataPengetahuan=>dataPengetahuan.gejala === data.gejala)
     let dataKerusakan = kerusakan.find(dataKeru => dataKeru.namaKerusakan === pengetahuan.namaKerusakan)
-    console.log(dataKerusakan);
         $('tbody').append(`
         <tr>
             <th>${index+1}</th>
