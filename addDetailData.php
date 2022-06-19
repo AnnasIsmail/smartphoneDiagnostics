@@ -11,6 +11,7 @@ $queryKerusakan ="select * from kerusakan";
 $getDataKerusakan = mysqli_query($konek_db,$queryKerusakan);
 while(  $hasil = mysqli_fetch_row($getDataKerusakan)){
   $lastIndex = substr($hasil[0] , 1);
+  $lastIndex += 1;
 }
 
 ?>
@@ -129,13 +130,13 @@ while(  $hasil = mysqli_fetch_row($getDataKerusakan)){
       $gejala = $_POST['gejala'];
       $caraMengatasi = $_POST['cara-mengatasi'];
 
-      $query1="INSERT INTO kerusakan VALUES ( 'K$lastIndex+1','".$_POST['nama-kerusakan']."')";
+      $query1="INSERT INTO kerusakan VALUES ( 'K$lastIndex','".$_POST['nama-kerusakan']."')";
       mysqli_query($konek_db, $query1);
 
-      $query="INSERT INTO gejala VALUES ('G$lastIndex+1','".$_POST['gejala']."')";
+      $query="INSERT INTO gejala VALUES ('G$lastIndex','".$_POST['gejala']."')";
       mysqli_query($konek_db, $query);
 
-      $query2="INSERT INTO caramengatasi VALUES ('S$lastIndex+1','".$_POST['cara-mengatasi']."')";
+      $query2="INSERT INTO caramengatasi VALUES ('S$lastIndex','".$_POST['cara-mengatasi']."')";
       mysqli_query($konek_db, $query2);
                       
       header('location:gejala.php');

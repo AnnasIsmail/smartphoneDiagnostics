@@ -5,6 +5,12 @@ if(isset($_SESSION['login_user'])){
 header("location: about.php");
 }
 
+$queryKerusakan ="select * from kerusakan";
+$getDataKerusakan = mysqli_query($konek_db,$queryKerusakan);
+while(  $hasil = mysqli_fetch_row($getDataKerusakan)){
+  $lastIndex = $hasil[0];
+}
+
 ?>
 
 <!DOCTYPE html>
