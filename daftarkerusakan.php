@@ -102,9 +102,7 @@ while(  $hasil = mysqli_fetch_row($getDataKerusakan)){
 
 
 $(".nav-responsive").click(()=>{
-  console.log($(".nav").hasClass('slideOpen'))
   if($("nav").hasClass('slideOpen')){
-    console.log('masuk')
     $("nav").removeClass('slideOpen');
     $(".nav-responsive").removeClass('slideOpenGagang');
 
@@ -142,7 +140,7 @@ kerusakan.map((data , index)=>{
             <th>${index+1}</th>
             <td>${data.id}</td>
             <td>${data.namaKerusakan}</td>
-            <td><a href=\"detaildata.php?id=${data.id}"><i class="eye icon"></i></a> | <a href=\"editDetailData.php?id=${data.id}"><i class="pencil alternate icon"></i></a>  | <a href=\"deletekerusakan.php?id=${data.id}" onclick='return checkDelete()' ><i class="trash icon"></i></a> </td>
+            <td style="min-width: 120px" ><a href=\"detaildata.php?id=${data.id}"><i class="eye icon"></i></a> | <a href=\"editDetailData.php?id=${data.id}"><i class="pencil alternate icon"></i></a>  | <a href=\"deletekerusakan.php?id=${data.id}" onclick='return checkDelete()' ><i class="trash icon"></i></a> </td>
           </tr>
         `);
 })

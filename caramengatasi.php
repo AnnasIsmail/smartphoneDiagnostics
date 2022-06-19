@@ -7,7 +7,7 @@ header("location: about.php");
 
 echo"<script>var kerusakan = [];</script>";
 
-$queryKerusakan ="select * from gejala";
+$queryKerusakan ="select * from caramengatasi";
 $getDataKerusakan = mysqli_query($konek_db,$queryKerusakan);
 while(  $hasil = mysqli_fetch_row($getDataKerusakan)){
   echo"<script>kerusakan.push({id:'$hasil[0]',namaKerusakan:'$hasil[1]'})</script>";
@@ -50,13 +50,13 @@ while(  $hasil = mysqli_fetch_row($getDataKerusakan)){
           </span>
           Kerusakan
         </a>
-        <a href="gejala.php" class="panel-block is-active">
+        <a href="gejala.php" class="panel-block">
           <span class="panel-icon">
             <i class="paw large icon" aria-hidden="true"></i>
           </span>
           Gejala
         </a>
-        <a href="caramengatasi.php" class="panel-block">
+        <a href="caramengatasi.php" class="panel-block is-active">
           <span class="panel-icon">
             <i class="wrench large icon" aria-hidden="true"></i>
           </span>
@@ -77,13 +77,13 @@ while(  $hasil = mysqli_fetch_row($getDataKerusakan)){
     </div>
     
     <div class="content-data-kerusakan">
-      <h2 class="ui header">Daftar Gejala</h2>
+      <h2 class="ui header">Daftar Cara Mengatasi</h2>
 
       <div>
         <a href="addDetailData.php">
           <button class="ui active button">
             <i class="user icon"></i>
-            Add Data Gejala
+            Add Data Cara Mengatasi
           </button>
         </a>
       </div>
@@ -122,8 +122,8 @@ $(".nav-responsive").click(()=>{
   <thead>
     <tr>
       <th>No</th>
-      <th>ID Gejala</th>
-      <th>Nama Gejala</th>
+      <th>ID Cara Mengatasi</th>
+      <th>Nama Cara Mengatasi</th>
       <th>Detail</th>
     </tr>
   </thead>
