@@ -74,7 +74,7 @@ echo"<script>var id = '".$_GET['id']."';</script>";
     </div>
 
     <!-- Kanan -->
-    
+    <form method="post">
     <div class="col-sm-8 text-left">
       <h2 class="ui header"></h2>
       <div class="form-group"  method="POST">
@@ -98,7 +98,7 @@ echo"<script>var id = '".$_GET['id']."';</script>";
                        $sql = mysqli_query ($konek_db,$tampil);
                        while($data = mysqli_fetch_array ($sql))
                     {
-                       echo "<input type='text'  class='form-control' id='namakerusakan' value='".$data['namakerusakan']."'>";
+                       echo "<input type='text'  class='form-control' name='nama-kerusakan' value='".$data['namakerusakan']."'>";
                     }
                 ?>
      		 </div>
@@ -111,7 +111,7 @@ echo"<script>var id = '".$_GET['id']."';</script>";
                        $sql = mysqli_query ($konek_db,$tampil);
                        while($data = mysqli_fetch_array ($sql))
                     {
-                       echo "<input type='text'  class='form-control' id='namakerusakan' value='".$data['gejala']."'>";
+                       echo "<input type='text'  class='form-control' name='gejala' value='".$data['gejala']."'>";
                     }
                 ?>
      		 </div>
@@ -124,28 +124,54 @@ echo"<script>var id = '".$_GET['id']."';</script>";
                        $sql = mysqli_query ($konek_db,$tampil);
                        while($data = mysqli_fetch_array ($sql))
                     {
-                       echo "<textarea type='text' rows=6 class='form-control' id='namakerusakan' >".$data['caramengatasi']."</textarea";
+                       echo "<textarea type='text' rows=6 class='form-control' name='cara-mengatasi' >".$data['caramengatasi']."</textarea";
                     }
                 ?>
      		 </div>
         </div>
         </div>
-        
+
         <div class="container-button">
           <button class="ui button">
             Discard
           </button>
-          <button class="ui primary button">
+          <button class="ui primary button" type="submit" name ="submit" >
               Save
           </button>
-        </div>
-        </div>
 
+        </div>
+        </div>
+        </form>
 
   </main>
 
 
+  <?php
+    if(isset($_POST['submit'])){
+
+      $namaKerusakan = $_POST['nama-kerusakan'];
+      $gejala = $_POST['gejala'];
+      $caraMengatasi = $_POST['cara-mengatasi'];
+
+      $query1="update kerusakan SET namakerusakan='".$_POST['nama-kerusakan']."' WHERE idkerusakan='K$id'";
+      mysqli_query($konek_db, $query1);
+
+      $query="update gejala SET gejala='".$_POST['gejala']."' WHERE idgejala='G$id'";
+      mysqli_query($konek_db, $query);
+
+      $query2="update caramengatasi SET caramengatasi='".$_POST['cara-mengatasi']."' WHERE idkerusakan='S$id'";
+      mysqli_query($konek_db, $query2);
+                      
+      header('location:gejala.php');
+    }
+  ?>
+
+
 <script>
+
+  function checkUpdate(){
+    return confirm('Yakin semua data sudah benar ?');
+}
 
 $(".nav-responsive").click(()=>{
   console.log($(".nav").hasClass('slideOpen'))

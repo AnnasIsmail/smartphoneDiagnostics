@@ -5,6 +5,13 @@ if(isset($_SESSION['login_user'])){
 header("location: about.php");
 }
 
+$lastIndex = 0;
+
+$queryKerusakan ="select * from kerusakan";
+$getDataKerusakan = mysqli_query($konek_db,$queryKerusakan);
+while(  $hasil = mysqli_fetch_row($getDataKerusakan)){
+  $lastIndex = substr($hasil[0] , 1);
+}
 
 ?>
 <!DOCTYPE html>
@@ -77,25 +84,26 @@ header("location: about.php");
     </div>
 
     <!-- Kanan -->
+    <form method="post">
     
     <div class="col-sm-8 text-left">
       <h2 class="ui header">Create New Data</h2>
         <div class="form-group"  method="POST">
       			<label class="control-label">Nama Kerusakan :</label>
       		<div >
-                       <input type='text'  class='form-control' id='namakerusakan'>
+                <input type='text'  class='form-control' name='nama-kerusakan' id='namakerusakan'>
      		 </div>
         </div>
         <div class="form-group"  method="POST">
       			<label class="control-label">Gejala :</label>
       		<div >
-                    <input type='text'  class='form-control' id='namakerusakan'>
+                <input type='text'  class='form-control' name='gejala' id='namakerusakan'>
      		 </div>
         </div>
         <div class="form-group"  method="POST">
       			<label class="control-label">Cara Mengatasi :</label>
       		<div >
-                   <textarea type='text' rows=6 class='form-control' id='namakerusakan' ></textarea>
+                <textarea type='text' rows=6 class='form-control' name='cara-mengatasi' id='namakerusakan' ></textarea>
      		 </div>
         </div>
         
@@ -103,15 +111,36 @@ header("location: about.php");
           <button class="ui button">
             Discard
           </button>
-          <button class="ui primary button">
+        <button type="submit" name ="submit" class="btn btn-primary">
               Save
           </button>
         </div>
         </div>
+        </form>
 
 
   </main>
 
+  <?php
+  
+    if(isset($_POST['submit'])){
+
+      $namaKerusakan = $_POST['nama-kerusakan'];
+      $gejala = $_POST['gejala'];
+      $caraMengatasi = $_POST['cara-mengatasi'];
+
+      $query1="INSERT INTO kerusakan VALUES ( 'K$lastIndex+1','".$_POST['nama-kerusakan']."')";
+      mysqli_query($konek_db, $query1);
+
+      $query="INSERT INTO gejala VALUES ('G$lastIndex+1','".$_POST['gejala']."')";
+      mysqli_query($konek_db, $query);
+
+      $query2="INSERT INTO caramengatasi VALUES ('S$lastIndex+1','".$_POST['cara-mengatasi']."')";
+      mysqli_query($konek_db, $query2);
+                      
+      header('location:gejala.php');
+    }
+  ?>
 
 <script>
 
@@ -133,20 +162,6 @@ $(".nav-responsive").click(()=>{
     $(".nav-responsive").addClass('slideOpenGagang');
   }
 });
-
-  if(id.startsWith("K")){
-    $(".header").html("Update Detail Kerusakan");
-    $(".label-id").html("ID Kerusakan :");
-
-  }else  if(id.startsWith("G")){
-    $(".header").html("Update Detail Gejala");
-    $(".label-id").html("ID Gejala :");
-
-  }else  if(id.startsWith("S")){
-    $(".header").html("Update Detail Cara Mengatasi");
-    $(".label-id").html("ID Cara Mengatasi :");
-
-  }
 
 </script>
 
