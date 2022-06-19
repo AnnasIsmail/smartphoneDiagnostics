@@ -53,12 +53,6 @@ echo"<script>var id = '".$_GET['id']."';</script>";
           </span>
           Gejala
         </a>
-        <a href="basispengetahuan.php" class="panel-block">
-          <span class="panel-icon">
-            <i class="book icon large" aria-hidden="true"></i>
-          </span>
-          Basis Pengetahuan
-        </a>
         <a href="caramengatasi.php" class="panel-block">
           <span class="panel-icon">
             <i class="wrench large icon" aria-hidden="true"></i>
