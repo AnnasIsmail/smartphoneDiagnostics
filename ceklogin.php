@@ -18,6 +18,6 @@ $result = $konek_db->query($query) or die($konek_db->error.__LINE__);
         }
     else {
 
-        header('location:salahlogin.php');
+        header('location:index.php');
         }
     ?>
