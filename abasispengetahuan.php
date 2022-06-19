@@ -92,7 +92,7 @@ include "session.php";
             $gejala = $_POST['gejala'];
             $jumlah_dipilih = count($gejala);
            for($x=0;$x<$jumlah_dipilih;$x++){
-	                   $hasil= mysqli_query($konek_db, "INSERT INTO basispengetahuan (namakerusakan, gejala) values('$kerusakan','$gejala[$x]')");
+	                   $hasil = mysqli_query($konek_db, "INSERT INTO basispengetahuan (namakerusakan, gejala) values('$kerusakan','$gejala[$x]')");
                         if($hasil){
                             echo '<script language="javascript">';
                             echo 'alert("Data Berhasil disimpan")';

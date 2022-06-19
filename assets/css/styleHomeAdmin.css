@@ -20,6 +20,13 @@ nav{
     display: flex !important;
     flex-direction: column;
     justify-content: space-between;
+    background-color: white;
+}
+
+.nav-responsive{
+    position: fixed;
+    display: none;
+    color: #485fc7 !important;
 }
 
 .panel-block{
@@ -86,13 +93,13 @@ nav{
   footer {
 
     bottom:0;
-   width:100%;
+   width:100%; 
    background-color:#113A8C;
    color: white;
    height: 100%;
    display: flex !important;
    align-items: center;
-   z-index: 200 !important
+   z-index: 20 !important
  }
 
  footer p{
@@ -100,3 +107,96 @@ nav{
    margin: auto;
    font-weight: bold;
  }
+
+
+
+ @media only screen and (max-width: 1250px) {
+    .content-right{
+        grid-template-columns: 400px;
+        margin: auto;
+        gap: 20px;
+    }
+}
+
+@media only screen and (max-width: 900px) {
+    nav{
+        width: 280px;
+        position: fixed;
+        height: calc(100% - 60px);
+        z-index: 100 !important;
+        left: -300px;
+    }
+
+    main{
+        grid-template-columns: 1fr;
+    }
+
+    .nav-responsive{
+        display: inherit;
+        top: 3.5px;
+        left: 5px;
+        background-color: white;
+        z-index: 101 !important;
+        border-radius: 5px !important;
+    }
+
+    .nav-responsive i.icon{
+        margin: 0 !important;
+    }
+
+    .slideOpen{
+        left: 0;
+        animation: open 0.5s ;
+    }
+
+    @keyframes open {
+        from{
+            left: -300px;
+        }
+        to{
+            left: 0;
+        }
+    }
+
+    .slideClosed{
+        left: -300px;
+        animation: closed 0.5s ;
+    }
+
+    @keyframes closed {
+        from{
+            left: 0;
+        }
+        to{
+            left: -300px;
+        }
+    }
+
+    .slideOpenGagang{
+        left: 220px;
+        animation: openGagang 0.5s ;
+    }
+
+    @keyframes openGagang {
+        from{
+            left: 5px;
+        }
+        to{
+            left: 220px;
+        }
+    }
+
+    .slideClosedGagang{
+        left: 5px;
+        animation: closedGagang 0.5s ;
+    }
+
+    @keyframes closedGagang {
+        from{
+            left: 220px;
+        }
+        to{
+            left: 5px;
+        }
+    }
+}

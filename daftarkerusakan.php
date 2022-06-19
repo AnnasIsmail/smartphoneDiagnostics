@@ -10,7 +10,7 @@ echo"<script>var kerusakan = [];</script>";
 $queryKerusakan ="select * from kerusakan";
 $getDataKerusakan = mysqli_query($konek_db,$queryKerusakan);
 while(  $hasil = mysqli_fetch_row($getDataKerusakan)){
-  echo"<script>kerusakan.push({id:'$hasil[0]',namaKerusakan:'$hasil[1]',jenishp:'$hasil[2]'})</script>";
+  echo"<script>kerusakan.push({id:'$hasil[0]',namaKerusakan:'$hasil[1]'})</script>";
 }
 
 ?>
@@ -34,7 +34,6 @@ while(  $hasil = mysqli_fetch_row($getDataKerusakan)){
   <nav class="panel is-link">
       <div>
         <p class="panel-heading">
-          <!-- Hello, <?php echo $login_session; ?> -->
           Hello Admin
 
         </p>
@@ -53,19 +52,13 @@ while(  $hasil = mysqli_fetch_row($getDataKerusakan)){
         </a>
         <a href="gejala.php" class="panel-block">
           <span class="panel-icon">
-            <i class="stethoscope large icon" aria-hidden="true"></i>
+            <i class="paw large icon" aria-hidden="true"></i>
           </span>
-          Ciri Kerusakan
-        </a>
-        <a href="basispengetahuan.php" class="panel-block">
-          <span class="panel-icon">
-            <i class="book icon large" aria-hidden="true"></i>
-          </span>
-          Basis Pengetahuan
+          Gejala
         </a>
         <a href="caramengatasi.php" class="panel-block">
           <span class="panel-icon">
-            <i class="first aid large icon" aria-hidden="true"></i>
+            <i class="wrench large icon" aria-hidden="true"></i>
           </span>
           Cara Mengatasi
         </a>
@@ -79,14 +72,20 @@ while(  $hasil = mysqli_fetch_row($getDataKerusakan)){
       </div>
     </nav>
 
+    <div class="nav-responsive">
+    <i class="bordered list alternate icon large link"></i>
+    </div>
+    
     <div class="content-data-kerusakan">
       <h2 class="ui header">Daftar Kerusakan</h2>
 
       <div>
-        <button class="ui active button">
-          <i class="user icon"></i>
-          Add Data kerusakan
-        </button>
+        <a href="addDetailData.php">
+          <button class="ui active button">
+            <i class="user icon"></i>
+            Add Data kerusakan
+          </button>
+        </a>
       </div>
 
       <table class="table">
@@ -100,13 +99,33 @@ while(  $hasil = mysqli_fetch_row($getDataKerusakan)){
 
 
 <script language="JavaScript" type="text/javascript">
+
+
+$(".nav-responsive").click(()=>{
+  console.log($(".nav").hasClass('slideOpen'))
+  if($("nav").hasClass('slideOpen')){
+    console.log('masuk')
+    $("nav").removeClass('slideOpen');
+    $(".nav-responsive").removeClass('slideOpenGagang');
+
+    $("nav").addClass('slideClosed');
+    $(".nav-responsive").addClass('slideClosedGagang');
+  }else{
+
+    $("nav").removeClass('slideClosed');
+    $(".nav-responsive").removeClass('slideClosedGagang');
+
+    $("nav").addClass('slideOpen');
+    $(".nav-responsive").addClass('slideOpenGagang');
+  }
+});
+
     $('.table').empty().append(`
   <thead>
     <tr>
       <th>No</th>
       <th>ID Kerusakan</th>
       <th>Nama Kerusakan</th>
-      <th>Jenis HP</th>
       <th>Detail</th>
     </tr>
   </thead>
@@ -123,12 +142,14 @@ kerusakan.map((data , index)=>{
             <th>${index+1}</th>
             <td>${data.id}</td>
             <td>${data.namaKerusakan}</td>
-            <td>${data.jenishp}</td>
-            <td><a href=\"hasildiagnosa.php?id=${data.id}">Lihat Detail</a></td>
+            <td><a href=\"detaildata.php?id=${data.id}"><i class="eye icon"></i></a> | <a href=\"editDetailData.php?id=${data.id}"><i class="pencil alternate icon"></i></a>  | <a href=\"deletekerusakan.php?id=${data.id}" onclick='return checkDelete()' ><i class="trash icon"></i></a> </td>
           </tr>
         `);
 })
 
+function checkDelete(){
+    return confirm('Yakin menghapus data ini?');
+}
 
 </script>
 
