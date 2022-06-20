@@ -48,18 +48,27 @@
   <div class="toast-container position-static show">
   <div class="toast" role="alert" aria-live="assertive" aria-atomic="true">
     <div class="toast-body">
-    <button class="ui instagram button">
-      <i class="instagram icon"></i>
-        @ariefadji
-      </button>
+      <a href="https://www.instagram.com/ariefadji/">
+        <button class="ui instagram button">
+          <i class="instagram icon"></i>
+            @ariefadji
+          </button>
+      </a>
+
+    <a href="mailto:ariefadjinugroho515@gmail.com">
       <button class="ui google plus button">
-  <i class="google plus icon"></i>
-  ariefadjinugroho515@gmail.com
-</button>
-    <button class="ui facebook button">
-  <i class="facebook icon"></i>
-  Arief Adji
-</button>
+        <i class="google icon"></i>
+        ariefadjinugroho515@gmail.com
+      </button>
+    </a>
+
+    <a href="https://www.facebook.com/RIPP00">
+      <button class="ui facebook button">
+        <i class="facebook icon"></i>
+        Arief Adji
+      </button>
+    </a>
+
     </div>
   </div>
 

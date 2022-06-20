@@ -22,3 +22,21 @@ main div , main p{
     margin: 0 !important;
 }
 
+.toast-body{
+  display: grid !important;
+  grid-template-columns: auto auto auto;
+}
+
+@media only screen and (max-width: 650px) {
+
+  .toast-body{
+  display: grid !important;
+  grid-template-columns: auto auto ;
+    justify-content: center;
+    row-gap: 4px;
+  }
+
+  .toast-body :nth-child(3){
+    grid-column: 1 / span 2;
+  }
+}

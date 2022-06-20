@@ -11,19 +11,13 @@ echo"<script>var gejala = [];var basisPengetahuan = [];var kerusakan = []; var c
 $queryGejala ="select * from gejala";
 $getDataGejala = mysqli_query($konek_db,$queryGejala);
 while(  $hasil = mysqli_fetch_row($getDataGejala)){
-  echo"<script>gejala.push({id:'$hasil[0]',gejala:'$hasil[1]',jenishp:'$hasil[2]'})</script>";
-}
-
-$queryBasisPengetahuan ="select * from basispengetahuan";
-$getDataBasisPengetahuan = mysqli_query($konek_db,$queryBasisPengetahuan);
-while(  $hasil = mysqli_fetch_row($getDataBasisPengetahuan)){
-  echo"<script>basisPengetahuan.push({namaKerusakan:'$hasil[0]',gejala:'$hasil[1]'})</script>";
+  echo"<script>gejala.push({id:'$hasil[0]',gejala:'$hasil[1]'})</script>";
 }
 
 $queryKerusakan ="select * from kerusakan";
 $getDataKerusakan = mysqli_query($konek_db,$queryKerusakan);
 while(  $hasil = mysqli_fetch_row($getDataKerusakan)){
-  echo"<script>kerusakan.push({id:'$hasil[0]',namaKerusakan:'$hasil[1]',jenishp:'$hasil[2]'})</script>";
+  echo"<script>kerusakan.push({id:'$hasil[0]',namaKerusakan:'$hasil[1]'})</script>";
 }
 
 $queryCaraMengatasi ="select * from caramengatasi";
@@ -45,6 +39,7 @@ while(  $hasil = mysqli_fetch_row($getDataCaraMengatasi)){
   <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/semantic-ui/2.4.1/semantic.min.css" integrity="sha512-8bHTC73gkZ7rZ7vpqUQThUDhqcNFyYi2xgDgPDHc+GXVGHXq+xPjynxIopALmOPqzo9JZj0k6OqqewdGO3EsrQ==" crossorigin="anonymous" referrerpolicy="no-referrer" />
   <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.2.0-beta1/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-0evHe/X+R7YkIZDRvuzKMRqM+OrBnVFBL6DOitfPri4tjfHxaWutUpFmBp4vmVor" crossorigin="anonymous">
   <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bulma@0.9.4/css/bulma.min.css">
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.6.0/jquery.min.js" integrity="sha512-894YE6QWD5I59HgZOGReFYm4dnWc1Qt5NtvYSaNcOP+u1T9qYdvdihz0PPSiiqn/+/3e7Jo4EaG7TubfWGUrMQ==" crossorigin="anonymous" referrerpolicy="no-referrer"></script>
 
 <link rel="icon" href="img/logo.png">
 </head>
@@ -72,8 +67,8 @@ while(  $hasil = mysqli_fetch_row($getDataCaraMengatasi)){
 </nav>
 
 <main class="main-diagnosa">
-  <div>
-    <h1 class="ui header">Diagnosa Kerusakan</h1>
+  <h1 class="ui header">Diagnosa Kerusakan</h1>
+  <!-- <div>
 
     <div class="control has-icons-left">
   <div class="select">
@@ -86,7 +81,7 @@ while(  $hasil = mysqli_fetch_row($getDataCaraMengatasi)){
     <i class="large mobile icon"></i>
   </div>
 </div>
-  </div>
+  </div> -->
 
   <div class="ciri-kerusakan">
 
@@ -128,8 +123,8 @@ function showCiriKerusakan(){
   $('.table').empty();
   $('.ciri-kerusakan').empty();
   indexChooseTrue = [];
-  let selectJenisHP = document.getElementById('selectJenisHP').value
-  if(selectJenisHP !== "Pilih Jenis Handphone"){
+  // let selectJenisHP = document.getElementById('selectJenisHP').value
+  // if(selectJenisHP !== "Pilih Jenis Handphone"){
 
   $('.ciri-kerusakan').empty().append(`    
   <h4 class="ui header">Ciri Kerusakan</h4>
@@ -140,17 +135,17 @@ function showCiriKerusakan(){
     `);
 
   gejala.map((data , index)=>{
-    if(data.jenishp === selectJenisHP){
+    // if(data.jenishp === selectJenisHP){
       $(".content-ciri-kerusakan").append(`
-      <div class="form-check form-switch">
+        <div class="form-check form-switch">
           <input class="form-check-input" onchange="changeCheckbox('${data.id}')" type="checkbox" role="switch" id="ciriKerusakan${data.id}">
           <label class="form-check-label" for="ciriKerusakan${data.id}">${data.gejala}</label>
         </div>
       `);
-    }
+    // }
   })
 
-}
+// }
 
 }
 
@@ -171,7 +166,6 @@ function showTable(){
       <th>No</th>
       <th>ID Kerusakan</th>
       <th>Nama Kerusakan</th>
-      <th>Jenis HP</th>
       <th>Detail</th>
     </tr>
   </thead>
@@ -198,7 +192,6 @@ function showTable(){
             <th>${index+1}</th>
             <td>${data.id}</td>
             <td>${pengetahuan.namaKerusakan}</td>
-            <td>${data.jenishp}</td>
             <td><a href=\"hasildiagnosa.php?id=${dataKerusakan.id}">Lihat Detail</a></td>
           </tr>
         `);
