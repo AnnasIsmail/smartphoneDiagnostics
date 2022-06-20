@@ -5,7 +5,7 @@ if(isset($_SESSION['login_user'])){
 header("location: about.php");
 }
 
-echo"<script>var gejala = [];var basisPengetahuan = [];var kerusakan = []; var caraMengatasi = [];</script>";
+echo"<script>var gejala = [];var kerusakan = []; var caraMengatasi = [];</script>";
 
 
 $queryGejala ="select * from gejala";
@@ -149,6 +149,8 @@ function showCiriKerusakan(){
 
 }
 
+showCiriKerusakan();
+
 function showTable(){
 
   $('.ciri-kerusakan').empty().append(`    
@@ -185,13 +187,14 @@ function showTable(){
         <label class="form-check-label" for="ciriKerusakan${data.id}">${data.gejala}</label>
       </div>
     `);
-    let pengetahuan = basisPengetahuan.find(dataPengetahuan=>dataPengetahuan.gejala === data.gejala)
-    let dataKerusakan = kerusakan.find(dataKeru => dataKeru.namaKerusakan === pengetahuan.namaKerusakan)
+    let idKerusakan = dataIndex.slice(1);
+    let dataKerusakan = kerusakan.find(dataKeru => dataKeru.id === `K${idKerusakan}`)
+    console.log(dataKerusakan);
         $('tbody').append(`
         <tr>
             <th>${index+1}</th>
             <td>${data.id}</td>
-            <td>${pengetahuan.namaKerusakan}</td>
+            <td>${dataKerusakan.namaKerusakan}</td>
             <td><a href=\"hasildiagnosa.php?id=${dataKerusakan.id}">Lihat Detail</a></td>
           </tr>
         `);

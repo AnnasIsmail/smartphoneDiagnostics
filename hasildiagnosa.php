@@ -4,6 +4,9 @@ include('koneksi.php');
 if(isset($_SESSION['login_user'])){
 header("location: about.php");
 }
+
+$id = substr($_GET['id'], 1);
+
 ?>
 <!DOCTYPE html>
 <html lang="en">
@@ -81,25 +84,11 @@ header("location: about.php");
         </div>
 
 
-
-        <div class="form-group"  method="POST">
-      			<label class="control-label col-sm-2">Jenis :</label>
-      		<div class="col-sm-10">
-                <?php
-                       $tampil = "SELECT * FROM kerusakan where idkerusakan='".$_GET['id']."'";
-                       $sql = mysqli_query ($konek_db,$tampil);
-                       while($data = mysqli_fetch_array ($sql))
-                    {
-                       echo "<input type='text'  class='form-control' id='jensihp' readonly value='".$data['jenishp']."'>";
-                    }
-                ?>
-     		 </div>
-        </div>
         <div class="form-group"  method="POST">
       			<label class="control-label col-sm-2">Ciri Kerusakan :</label>
       		<div class="col-sm-10">
                 <?php
-                       $tampil = "SELECT * FROM kerusakan p, basispengetahuan b where p.idkerusakan='".$_GET['id']."' and p.namakerusakan=b.namakerusakan";
+                       $tampil = "SELECT * FROM gejala where idgejala='G$id'";
                        $sql = mysqli_query ($konek_db,$tampil);
                        while($data = mysqli_fetch_array ($sql))
                     {
@@ -108,17 +97,18 @@ header("location: about.php");
                 ?>
      		 </div>
         </div>
+
         <div class="form-group"  method="POST">
       			<label class="control-label col-sm-2">Cara Mengatasi :</label>
       		<div class="col-sm-10">
                 <?php
-                       $tampil = "SELECT * FROM caramengatasi where idkerusakan='".$_GET['id']."'";
+                       $tampil = "SELECT * FROM caramengatasi where idkerusakan='S$id'";
                        $sql = mysqli_query ($konek_db,$tampil);
                        while($data = mysqli_fetch_array ($sql))
                     {
-                       echo "<textarea  rows='1' class='form-control' id='penanganan'  readonly>".$data['caramengatasi']."</textarea>";
+                       echo "<textarea  rows='5' class='form-control' id='penanganan'  readonly>".$data['caramengatasi']."</textarea>";
                     }
-                ?>
+                ?> 
      		 </div>
 
     </div>

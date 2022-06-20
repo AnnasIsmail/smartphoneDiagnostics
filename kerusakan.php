@@ -5,25 +5,18 @@ if(isset($_SESSION['login_user'])){
 header("location: about.php");
 }
 
-echo"<script>var gejala = [];var basisPengetahuan = [];var kerusakan = []; var caraMengatasi = [];</script>";
-
+echo"<script>var gejala = [];var kerusakan = []; var caraMengatasi = [];</script>";
 
 $queryGejala ="select * from gejala";
 $getDataGejala = mysqli_query($konek_db,$queryGejala);
 while(  $hasil = mysqli_fetch_row($getDataGejala)){
-  echo"<script>gejala.push({id:'$hasil[0]',gejala:'$hasil[1]',jenishp:'$hasil[2]'})</script>";
-}
-
-$queryBasisPengetahuan ="select * from basispengetahuan";
-$getDataBasisPengetahuan = mysqli_query($konek_db,$queryBasisPengetahuan);
-while(  $hasil = mysqli_fetch_row($getDataBasisPengetahuan)){
-  echo"<script>basisPengetahuan.push({namaKerusakan:'$hasil[0]',gejala:'$hasil[1]'})</script>";
+  echo"<script>gejala.push({id:'$hasil[0]',gejala:'$hasil[1]'})</script>";
 }
 
 $queryKerusakan ="select * from kerusakan";
 $getDataKerusakan = mysqli_query($konek_db,$queryKerusakan);
 while(  $hasil = mysqli_fetch_row($getDataKerusakan)){
-  echo"<script>kerusakan.push({id:'$hasil[0]',namaKerusakan:'$hasil[1]',jenishp:'$hasil[2]'})</script>";
+  echo"<script>kerusakan.push({id:'$hasil[0]',namaKerusakan:'$hasil[1]'})</script>";
 }
 
 $queryCaraMengatasi ="select * from caramengatasi";
@@ -44,6 +37,7 @@ while(  $hasil = mysqli_fetch_row($getDataCaraMengatasi)){
   <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/semantic-ui/2.4.1/semantic.min.css" integrity="sha512-8bHTC73gkZ7rZ7vpqUQThUDhqcNFyYi2xgDgPDHc+GXVGHXq+xPjynxIopALmOPqzo9JZj0k6OqqewdGO3EsrQ==" crossorigin="anonymous" referrerpolicy="no-referrer" />
   <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.2.0-beta1/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-0evHe/X+R7YkIZDRvuzKMRqM+OrBnVFBL6DOitfPri4tjfHxaWutUpFmBp4vmVor" crossorigin="anonymous">
   <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bulma@0.9.4/css/bulma.min.css">
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.6.0/jquery.min.js" integrity="sha512-894YE6QWD5I59HgZOGReFYm4dnWc1Qt5NtvYSaNcOP+u1T9qYdvdihz0PPSiiqn/+/3e7Jo4EaG7TubfWGUrMQ==" crossorigin="anonymous" referrerpolicy="no-referrer"></script>
 
 <link rel="icon" href="img/logo.png">
 </head>
@@ -71,8 +65,8 @@ while(  $hasil = mysqli_fetch_row($getDataCaraMengatasi)){
 </nav>
 
 <main class="main-diagnosa">
-  <div>
-    <h1 class="ui header">Daftar Kerusakan</h1>
+  <h1 class="ui header">Daftar Kerusakan</h1>
+  <!-- <div>
 
     <div class="control has-icons-left">
   <div class="select">
@@ -85,7 +79,7 @@ while(  $hasil = mysqli_fetch_row($getDataCaraMengatasi)){
     <i class="large mobile icon"></i>
   </div>
 </div>
-  </div>
+  </div> -->
 
   <table class="table">
 
@@ -103,47 +97,36 @@ while(  $hasil = mysqli_fetch_row($getDataCaraMengatasi)){
 
 
 <script>
-function showCiriKerusakan(){
   $('.table').empty();
-  indexChooseTrue = [];
-  let selectJenisHP = document.getElementById('selectJenisHP').value
-  if(selectJenisHP !== "Pilih Jenis Handphone"){
+
+  $('.table').empty().append(`
+    <thead>
+      <tr>
+        <th>No</th>
+        <th>ID Kerusakan</th>
+        <th>Nama Kerusakan</th>
+        <th>Detail</th>
+      </tr>
+    </thead>
+
+    <tbody>
 
 
-    $('.table').empty().append(`
-<thead>
-  <tr>
-    <th>No</th>
-    <th>ID Kerusakan</th>
-    <th>Nama Kerusakan</th>
-    <th>Jenis HP</th>
-    <th>Detail</th>
-  </tr>
-</thead>
-
-<tbody>
-
-
-</tbody>
-`);
+    </tbody>
+    `);
 
   kerusakan.map((data , index)=>{
-    if(data.jenishp === selectJenisHP){
       $('tbody').append(`
         <tr>
             <th>${index+1}</th>
             <td>${data.id}</td>
             <td>${data.namaKerusakan}</td>
-            <td>${data.jenishp}</td>
             <td><a href=\"hasildiagnosa.php?id=${data.id}">Lihat Detail</a></td>
           </tr>
         `);
-    }
   })
 
-}
 
-}
 </script>
 
 <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.2.0-beta1/dist/js/bootstrap.bundle.min.js" integrity="sha384-pprn3073KE6tl6bjs2QrFaJGz5/SUsLqktiwsUTF55Jfv3qYSDhgCecCxMW52nD2" crossorigin="anonymous"></script>
