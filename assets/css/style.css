@@ -1,3 +1,7 @@
+html,body{
+  overflow: auto !important;
+  }
+
 body{
   display: grid;
   grid-template-rows: 60px 1fr 60px ;
@@ -6,7 +10,6 @@ body{
 .navbar {
   margin: 0 5vw;
   z-index: 100 !important;
-  /* position: fixed !important; */
 }
 
 .navbar-collapse{
@@ -106,6 +109,12 @@ body{
       .main-home{
         grid-template-columns: 500px !important; 
         grid-template-rows: 1fr 1fr !important;
+      }
+    }
+
+    @media only screen and (max-width: 991px) {
+      .navbar {
+        margin: 0;
       }
     }
 

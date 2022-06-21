@@ -5,8 +5,37 @@ if(isset($_SESSION['login_user'])){
 header("location: about.php");
 }
 
-$id = substr($_GET['id'], 1);
-echo"<script>var id = '".$_GET['id']."';</script>";
+$identifier = substr($_GET['id'],0 ,1);
+  echo"<script>var id='$identifier'</script>";
+  $id = substr($_GET['id'], 1);
+
+$idkerusakan = $_GET['id'];
+$idgejala = [];
+$idsolusi = "";
+
+if($identifier === 'S'){
+    $querySolusi ="select * from keputusan where idsolusi = '".$_GET['id']."'";
+    $getDataSolusi = mysqli_query($konek_db,$querySolusi);
+    while(  $hasil = mysqli_fetch_row($getDataSolusi)){
+      $idkerusakan = $hasil[1];
+    }
+}else if($identifier === 'G'){
+  $querySolusi ="select * from keputusan where idgejala = '".$_GET['id']."'";
+  $getDataSolusi = mysqli_query($konek_db,$querySolusi);
+  while(  $hasil = mysqli_fetch_row($getDataSolusi)){
+    $idkerusakan = $hasil[1];
+  }
+}
+
+
+
+$querySolusi ="select * from keputusan where idkerusakan = '$idkerusakan'";
+$getDataSolusi = mysqli_query($konek_db,$querySolusi);
+while(  $hasil = mysqli_fetch_row($getDataSolusi)){
+  array_push($idgejala,$hasil[0]);
+  $idkerusakan = $hasil[1];
+  $idsolusi = $hasil[2];
+}
 
 
 ?>
@@ -59,6 +88,12 @@ echo"<script>var id = '".$_GET['id']."';</script>";
           </span>
           Cara Mengatasi
         </a>
+        <a href="keputusan.php" class="panel-block">
+          <span class="panel-icon">
+            <i class="thumbtack large icon" aria-hidden="true"></i>
+          </span>
+          Keputusan
+        </a>
       </div>
     
       <div class="panel-block log-out">
@@ -81,12 +116,7 @@ echo"<script>var id = '".$_GET['id']."';</script>";
       			<label class="control-label label-id">ID :</label>
       		<div >
                 <?php
-                       $tampil = "SELECT * FROM kerusakan where idkerusakan='".$_GET['id']."'";
-                       $sql = mysqli_query ($konek_db,$tampil);
-                       while($data = mysqli_fetch_array ($sql))
-                    {
-                       echo "<input type='text'  class='form-control' id='idkerusakan' readonly value='".$data['idkerusakan']."'>";
-                    }
+                       echo "<input type='text'  class='form-control' id='idkerusakan' readonly value='$idkerusakan'>";
                 ?>
      		 </div>
         </div>
@@ -94,7 +124,7 @@ echo"<script>var id = '".$_GET['id']."';</script>";
       			<label class="control-label">Nama Kerusakan :</label>
       		<div >
                 <?php
-                       $tampil = "SELECT * FROM kerusakan where idkerusakan='K$id'";
+                       $tampil = "SELECT * FROM kerusakan where idkerusakan='$idkerusakan'";
                        $sql = mysqli_query ($konek_db,$tampil);
                        while($data = mysqli_fetch_array ($sql))
                     {
@@ -107,12 +137,14 @@ echo"<script>var id = '".$_GET['id']."';</script>";
       			<label class="control-label">Gejala :</label>
       		<div >
                 <?php
-                       $tampil = "SELECT * FROM gejala where idgejala='G$id'";
-                       $sql = mysqli_query ($konek_db,$tampil);
-                       while($data = mysqli_fetch_array ($sql))
-                    {
-                       echo "<input type='text'  class='form-control' id='namakerusakan' readonly value='".$data['gejala']."'>";
-                    }
+                      foreach($idgejala as $id){
+                        $tampil = "SELECT * FROM gejala where idgejala='$id'";
+                        $sql = mysqli_query ($konek_db,$tampil);
+                        while($data = mysqli_fetch_array ($sql))
+                     {
+                        echo "<input type='text'  class='form-control' id='namakerusakan' readonly value='".$data['gejala']."'>";
+                     }
+                      }
                 ?>
      		 </div>
         </div>
@@ -120,17 +152,16 @@ echo"<script>var id = '".$_GET['id']."';</script>";
       			<label class="control-label">Cara Mengatasi :</label>
       		<div >
                 <?php
-                       $tampil = "SELECT * FROM caramengatasi where idkerusakan='S$id'";
+                       $tampil = "SELECT * FROM caramengatasi where idsolusi='$idsolusi'";
                        $sql = mysqli_query ($konek_db,$tampil);
                        while($data = mysqli_fetch_array ($sql))
                     {
-                       echo "<textarea type='text' rows=6 class='form-control' id='namakerusakan' readonly >".$data['caramengatasi']."</textarea";
+                       echo "<textarea type='text' rows=4 class='form-control' id='namakerusakan' readonly >".$data['caramengatasi']."</textarea";
                     }
                 ?>
      		 </div>
         </div>
-
-        </div>
+      </div>
 
 
   </main>
@@ -176,7 +207,7 @@ $(".nav-responsive").click(()=>{
 <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.2.0-beta1/dist/js/bootstrap.bundle.min.js" integrity="sha384-pprn3073KE6tl6bjs2QrFaJGz5/SUsLqktiwsUTF55Jfv3qYSDhgCecCxMW52nD2" crossorigin="anonymous"></script>
 <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.6.0/jquery.min.js" integrity="sha512-894YE6QWD5I59HgZOGReFYm4dnWc1Qt5NtvYSaNcOP+u1T9qYdvdihz0PPSiiqn/+/3e7Jo4EaG7TubfWGUrMQ==" crossorigin="anonymous" referrerpolicy="no-referrer"></script>
 
-<footer class="container-fluid text-center">
+<footer>
   <p>Diagnosis Smartphone, Copyright 2022 &copy;</p>
 </footer>
 

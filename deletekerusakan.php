@@ -1,16 +1,25 @@
 <?php
 include('koneksi.php');
 
+$identifier = substr($_GET['id'],0 ,1);
 $id = substr($_GET['id'], 1);
 
-$query="DELETE from kerusakan where idkerusakan='K$id'";
-mysqli_query($konek_db, $query);
+if($identifier === 'K'){
+    $query="DELETE from kerusakan where idkerusakan='K$id'";
+    mysqli_query($konek_db, $query);
+    header("location:daftarkerusakan.php");
+}else if($identifier === 'S'){
+    $query="DELETE from caramengatasi where idsolusi='S$id'";
+    mysqli_query($konek_db, $query);
+    header("location:caramengatasi.php");
+}else if($identifier === 'G'){
+    $query="DELETE from gejala where idgejala='G$id'";
+    mysqli_query($konek_db, $query);
+    header("location:gejala.php");
+}else if($identifier === 'P'){
+    $query="DELETE from keputusan where idgejala='G$id'";
+    mysqli_query($konek_db, $query);
+    header("solusi.php");
+}
 
-$query="DELETE from caramengatasi where idkerusakan='S$id'";
-mysqli_query($konek_db, $query);
-
-$query="DELETE from gejala where idgejala='G$id'";
-mysqli_query($konek_db, $query);
-
-header("location:daftarkerusakan.php");
 ?>

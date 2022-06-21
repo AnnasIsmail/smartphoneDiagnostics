@@ -51,6 +51,12 @@ include "session.php";
           </span>
           Cara Mengatasi
         </a>
+        <a href="keputusan.php" class="panel-block">
+          <span class="panel-icon">
+            <i class="thumbtack large icon" aria-hidden="true"></i>
+          </span>
+          Keputusan
+        </a>
       </div>
     
       <div class="panel-block log-out">

@@ -5,7 +5,7 @@ if(isset($_SESSION['login_user'])){
 header("location: about.php");
 }
 
-echo"<script>var gejala = [];var kerusakan = []; var caraMengatasi = [];</script>";
+echo"<script>var gejala = [];var kerusakan = []; var caraMengatasi = []; var keputusan = [];</script>";
 
 
 $queryGejala ="select * from gejala";
@@ -24,6 +24,12 @@ $queryCaraMengatasi ="select * from caramengatasi";
 $getDataCaraMengatasi = mysqli_query($konek_db,$queryCaraMengatasi);
 while(  $hasil = mysqli_fetch_row($getDataCaraMengatasi)){
   echo"<script>caraMengatasi.push({id:'$hasil[0]',caraMengatasi:'$hasil[1]'})</script>";
+}
+
+$querySolusi ="select * from keputusan";
+$getDataSolusi = mysqli_query($konek_db,$querySolusi);
+while(  $hasil = mysqli_fetch_row($getDataSolusi)){
+  echo"<script>keputusan.push({idgejala:'$hasil[0]',idkerusakan:'$hasil[1]',idsolusi:'$hasil[2]'})</script>";
 }
 
 ?>
@@ -187,13 +193,14 @@ function showTable(){
         <label class="form-check-label" for="ciriKerusakan${data.id}">${data.gejala}</label>
       </div>
     `);
-    let idKerusakan = dataIndex.slice(1);
-    let dataKerusakan = kerusakan.find(dataKeru => dataKeru.id === `K${idKerusakan}`)
-    console.log(dataKerusakan);
+    console.log(keputusan);
+    let dataKeputusan = keputusan.find(dataKepu => dataKepu.idgejala === dataIndex);
+    console.log(dataKeputusan)
+    let dataKerusakan = kerusakan.find(dataKeru => dataKeru.id === dataKeputusan.idkerusakan);
         $('tbody').append(`
         <tr>
             <th>${index+1}</th>
-            <td>${data.id}</td>
+            <td>${dataKerusakan.id}</td>
             <td>${dataKerusakan.namaKerusakan}</td>
             <td><a href=\"hasildiagnosa.php?id=${dataKerusakan.id}">Lihat Detail</a></td>
           </tr>

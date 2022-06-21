@@ -1,6 +1,8 @@
 <?php
 include('koneksi.php');
 
+ob_start();
+
 if(isset($_SESSION['login_user'])){
 header("location: about.php");
 }
@@ -22,6 +24,7 @@ while(  $hasil = mysqli_fetch_row($getDataKerusakan)){
   <meta charset="utf-8">
   <meta name="viewport" content="width=device-width, initial-scale=1">
   <link rel="stylesheet" href="assets/css/styleHomeAdmin.css?v=<?php echo time(); ?>">
+  <link rel="stylesheet" href="assets/css/detail.css?v=<?php echo time(); ?>">
   <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/semantic-ui/2.4.1/semantic.min.css" integrity="sha512-8bHTC73gkZ7rZ7vpqUQThUDhqcNFyYi2xgDgPDHc+GXVGHXq+xPjynxIopALmOPqzo9JZj0k6OqqewdGO3EsrQ==" crossorigin="anonymous" referrerpolicy="no-referrer" />
   <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.2.0-beta1/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-0evHe/X+R7YkIZDRvuzKMRqM+OrBnVFBL6DOitfPri4tjfHxaWutUpFmBp4vmVor" crossorigin="anonymous">
   <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bulma@0.9.4/css/bulma.min.css">
@@ -35,9 +38,7 @@ while(  $hasil = mysqli_fetch_row($getDataKerusakan)){
       <div>
         <p class="panel-heading">
           Hello Admin
-
         </p>
-      
         <a href="homeadmin.php" class="panel-block">
           <span class="panel-icon">
             <i class="icon home large" aria-hidden="true"></i>
@@ -62,6 +63,12 @@ while(  $hasil = mysqli_fetch_row($getDataKerusakan)){
           </span>
           Cara Mengatasi
         </a>
+        <a href="keputusan.php" class="panel-block">
+          <span class="panel-icon">
+            <i class="thumbtack large icon" aria-hidden="true"></i>
+          </span>
+          Keputusan
+        </a>
       </div>
     
       <div class="panel-block log-out">
@@ -80,13 +87,12 @@ while(  $hasil = mysqli_fetch_row($getDataKerusakan)){
       <h2 class="ui header">Daftar Kerusakan</h2>
 
       <div>
-        <a href="addDetailData.php">
-          <button class="ui active button">
+          <button class="ui active button" onclick="add()">
             <i class="user icon"></i>
             Add Data kerusakan
           </button>
-        </a>
       </div>
+
 
       <table class="table">
   
@@ -140,7 +146,7 @@ kerusakan.map((data , index)=>{
             <th>${index+1}</th>
             <td>${data.id}</td>
             <td>${data.namaKerusakan}</td>
-            <td style="min-width: 120px" ><a href=\"detaildata.php?id=${data.id}"><i class="eye icon"></i></a> | <a href=\"editDetailData.php?id=${data.id}"><i class="pencil alternate icon"></i></a>  | <a href=\"deletekerusakan.php?id=${data.id}" onclick='return checkDelete()' ><i class="trash icon"></i></a> </td>
+            <td style="min-width: 120px" ><a href=\"detaildata.php?id=${data.id}" ><i class="eye icon"></i></a> | <a href="#" onclick="edit('${data.id}')"><i class="pencil alternate icon"></i></a>  | <a href=\"deletekerusakan.php?id=${data.id}" onclick='return checkDelete()' ><i class="trash icon"></i></a> </td>
           </tr>
         `);
 })
@@ -149,7 +155,102 @@ function checkDelete(){
     return confirm('Yakin menghapus data ini?');
 }
 
+function edit(id){
+  data = kerusakan.find((dataCari)=> dataCari.id === id);
+  $('.table').empty();
+  $(".content-data-kerusakan").empty().append(`      
+    <h2 class="ui header">Edit Data Kerusakan</h2>
+    <form method="post">
+      <div class="col-sm-8 text-left">
+          <div class="form-group"  method="POST">
+              <label class="control-label label-id">ID :</label>
+              <div>
+                <input type='text' class='form-control' name="id" value="${data.id}" >
+              </div>
+            </div>
+            <div class="form-group"  method="POST">
+                <label class="control-label">Nama Kerusakan :</label>
+              <div>
+                    <input type='text' class='form-control' name='nama-kerusakan' value="${data.namaKerusakan}" >
+              </div>
+            </div>
+            <div class="container-button">
+              <button class="ui button" onclick="location.reload()">
+                Discard
+              </button>
+              <button type="submit" name ="edit" class="btn btn-primary">
+                  Save
+              </button>
+            </div>
+        </div>
+      </form>`
+  );
+}
+
+function add(){
+  $('.table').empty();
+  $(".content-data-kerusakan").empty().append(`      
+    <h2 class="ui header">Tambah Data Kerusakan</h2>
+    <form method="post">
+      <div class="col-sm-8 text-left">
+          
+            <div class="form-group"  method="POST">
+                <label class="control-label">Nama Kerusakan :</label>
+              <div>
+                    <input type='text' class='form-control' name='nama-kerusakan'>
+              </div>
+            </div>
+            <div class="container-button">
+              <button class="ui button" onclick="location.reload()">
+                Discard
+              </button>
+              <button type="submit" name ="add" class="btn btn-primary">
+                  Save
+              </button>
+            </div>
+        </div>
+      </form>`
+  );
+}
+
 </script>
+
+<?php
+
+  if(isset($_POST['edit'])){
+
+    $id = $_POST['id'];
+    $namaKerusakan = $_POST['nama-kerusakan'];
+
+    $query1=$query1="update kerusakan SET namakerusakan='".$_POST['nama-kerusakan']."' WHERE idkerusakan='$id'";
+    mysqli_query($konek_db, $query1);
+
+                    
+    header('location: daftarkerusakan.php');
+  }
+
+  
+  if(isset($_POST['add'])){
+
+    $lastIndex = [];
+    $queryKerusakan ="select * from kerusakan";
+    $getDataKerusakan = mysqli_query($konek_db,$queryKerusakan);
+    while(  $hasil = mysqli_fetch_row($getDataKerusakan)){
+      $res = (int)substr($hasil[0] , 1);
+      array_push($lastIndex, $res);
+    }
+    $sorting = sort($lastIndex);
+    $length = sizeof($lastIndex);
+
+    $id = $lastIndex[$length-1]+1;
+    $namaKerusakan = $_POST['nama-kerusakan'];
+
+    $query1=$query1="INSERT INTO kerusakan VALUES ( 'K$id','".$_POST['nama-kerusakan']."')";
+    mysqli_query($konek_db, $query1);
+                    
+    header('location: daftarkerusakan.php');
+  }
+?>
 
 <footer class="container-fluid text-center">
   <p>Diagnosis Smartphone, Copyright 2022 &copy;</p>
