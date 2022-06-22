@@ -74,20 +74,7 @@ while(  $hasil = mysqli_fetch_row($getDataSolusi)){
 
 <main class="main-diagnosa">
   <h1 class="ui header">Diagnosa Kerusakan</h1>
-  <!-- <div>
 
-    <div class="control has-icons-left">
-  <div class="select">
-    <select class="dropdown" onchange="showCiriKerusakan()" id="selectJenisHP">
-      <option selected>Pilih Jenis Handphone</option>
-      <option>Android</option>
-    </select>
-  </div>
-  <div class="icon is-small is-left">
-    <i class="large mobile icon"></i>
-  </div>
-</div>
-  </div> -->
 
   <div class="ciri-kerusakan">
 

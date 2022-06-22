@@ -12,8 +12,8 @@
     grid-template-columns: 150px 1fr;
 }
 
-.form-group .control-label{
-    font-weight: 600;
+.control-label{
+    font-weight: 600 !important;
 }
 
 .col-sm-8 h2{
@@ -24,6 +24,31 @@
     display: grid !important;
     grid-template-columns: max-content max-content;
     justify-content: end;
+}
+
+.select{
+    width: 100% !important;
+}
+
+.dropdown{
+    width: 100% !important;
+    color: #485fc7 !important;
+    font-weight: 500;
+
+}
+
+#dropdownMenuButton1{
+    width: 100%;
+}
+
+.is-small .paw, .is-small .bug, .is-small .wrench{
+    color: #485fc7 !important;
+    padding-top: 8px;
+
+}
+
+.cara-mengatasi , .gejala{
+    padding-top: 10px;
 }
 
 @media only screen and (max-width: 1000px) {
