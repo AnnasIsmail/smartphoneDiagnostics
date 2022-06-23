@@ -117,8 +117,6 @@ while(  $hasil = mysqli_fetch_row($getDataSolusi)){
       </table>
     </div>
 
-    
-
 </main>
 
 
@@ -157,55 +155,26 @@ $(".nav-responsive").click(()=>{
 
 
   </tbody>
+  
   `);
 
 keputusan.map((data , index)=>{
     let dataKerusakan = kerusakan.find(dataCari => dataCari.id === data.idkerusakan);
   $('tbody').append(`
+  
         <tr>
             <th>${index+1}</th>
             <td>${data.idgejala}</td>
             <td>${dataKerusakan.namaKerusakan}</td>
             <td>${data.idsolusi}</td>
-            <td style="min-width: 120px" ><a href=\"detaildata.php?id=${data.id}" ><i class="eye icon"></i></a> | <a href=\"deletekerusakan.php?id=${data.id}" onclick='return checkDelete()' ><i class="trash icon"></i></a> </td>
+            <td style="min-width: 120px" ><form method="post"><a href=\"detaildata.php?id=${data.idkerusakan}" ><i class="eye icon"></i></a> | <a href=\"deletekerusakan.php?id=DELETE FROM keputusan WHERE idgejala='${data.idgejala}' and idkerusakan='${data.idkerusakan}' and idsolusi='${data.idsolusi}'" onclick='return checkDelete()' ><i class="trash icon"></i></a> </form></td>
           </tr>
+    
         `);
 })
 
-function checkDelete(){
+function checkDelete(data){
     return confirm('Yakin menghapus data ini?');
-}
-
-function edit(id){
-  data = kerusakan.find((dataCari)=> dataCari.id === id);
-  $('.table').empty();
-  $(".content-data-kerusakan").empty().append(`      
-    <h2 class="ui header">Edit Data Kerusakan</h2>
-    <form method="post">
-      <div class="col-sm-8 text-left">
-          <div class="form-group"  method="POST">
-              <label class="control-label label-id">ID :</label>
-              <div>
-                <input type='text' class='form-control' name="id" value="${data.id}" >
-              </div>
-            </div>
-            <div class="form-group"  method="POST">
-                <label class="control-label">Nama Kerusakan :</label>
-              <div>
-                    <input type='text' class='form-control' name='nama-kerusakan' value="${data.namaKerusakan}" >
-              </div>
-            </div>
-            <div class="container-button">
-              <button class="ui button" onclick="location.reload()">
-                Discard
-              </button>
-              <button type="submit" name ="edit" class="btn btn-primary">
-                  Save
-              </button>
-            </div>
-        </div>
-      </form>`
-  );
 }
 
 function add(){
@@ -331,7 +300,7 @@ function onchangeField(){
 
 <?php
 
-  if(isset($_POST['edit'])){
+  if(isset($_POST['delete'])){
 
     $id = $_POST['id'];
     $namaKerusakan = $_POST['nama-kerusakan'];

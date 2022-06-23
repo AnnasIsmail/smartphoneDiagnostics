@@ -16,10 +16,8 @@ if($identifier === 'K'){
     $query="DELETE from gejala where idgejala='G$id'";
     mysqli_query($konek_db, $query);
     header("location:gejala.php");
-}else if($identifier === 'P'){
-    $query="DELETE from keputusan where idgejala='G$id'";
+}else if($identifier === 'D'){
+    $query=$_GET['id'];
     mysqli_query($konek_db, $query);
-    header("solusi.php");
+    header("location:keputusan.php");
 }
-
-?>
