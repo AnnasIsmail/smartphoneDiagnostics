@@ -255,7 +255,7 @@ function add(){
 function onchangeCaraMengatasi(){
     let value = document.getElementById("selectSolusi").value;
     let dataCaraMengatasi = caraMengatasi.find(data => data.id === value);
-    $(".cara-mengatasi").empty().append(`<textarea class='form-control' rows="4">${dataCaraMengatasi.caraMengatasi}</textarea> `);
+    $(".cara-mengatasi").empty().append(`<textarea class='form-control' readonly rows="4">${dataCaraMengatasi.caraMengatasi}</textarea> `);
     document.getElementById("idSolusi").value = value
 
     onchangeField()
@@ -272,7 +272,7 @@ function onchangeKerusakan(){
 function onchangeGejala(){
     let value = document.getElementById("selectGejala").value;
     let dataGejala = gejala.find(data => data.id === value);
-    $(".gejala").empty().append(`<textarea class='form-control' rows="2">${dataGejala.gejala}</textarea> `);
+    $(".gejala").empty().append(`<textarea class='form-control' readonly rows="2">${dataGejala.gejala}</textarea> `);
     document.getElementById("idGejala").value = value
 
     onchangeField()
