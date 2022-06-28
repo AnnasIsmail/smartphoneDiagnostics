@@ -37,7 +37,6 @@
   </div>
 </nav>
 
-
 <!--   Akhir bagian Menu pada Header -->
 <main>
   <div>
