@@ -68,7 +68,7 @@ while(  $hasil = mysqli_fetch_row($getDataSolusi)){
         <div class="navbar-nav">
           <a class="nav-link" href="index.php">Home</a>
           <a class="nav-link" href="conatctUs.php">Contact Us</a>
-          <a class="nav-link active" aria-current="page" href="diagnosa.php">Diagnosa Kerusakan</a>
+          <a class="nav-link " aria-current="page" href="diagnosa.php">Diagnosa Kerusakan</a>
           <a class="nav-link" href="kerusakan.php">Daftar Kerusakan</a>
           <a class="nav-link" href="login.php">Login</a>
         </div>
